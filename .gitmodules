@@ -1,0 +1,6 @@
+[submodule "External/RXAssertions"]
+	path = External/RXAssertions
+	url = git://github.com/robrix/RXAssertions.git
+[submodule "External/Polymorph"]
+	path = External/Polymorph
+	url = git://github.com/robrix/Polymorph.git

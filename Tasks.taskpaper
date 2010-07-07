@@ -1,0 +1,9 @@
+Nodes:
+	- have a type pointer.
+	- can be visited.
+
+	Leaf nodes:
+		- have a data pointer.
+
+	Branch nodes:
+		- have child nodes.
