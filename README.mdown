@@ -4,4 +4,53 @@ Writing abstract syntax trees entails a lot of duplication. Arborescence’s pur
 
 In short, Arborescence cares about the tree’s shape and storage, and how to perform arbitrary operations across its nodes; you, in turn, care about writing those operations; everyone lives happily ever after.
 
-Note that there’s nothing in here particularly specific to an abstract syntax tree vs. some other tree-shaped model; Arborescence is in fact well suited to many different uses of tree models. ASTs were merely the impetus: I have written too many of them.
+Note that nothing in Arborescence is particularly specific to an abstract syntax tree vs. some other tree-shaped model; Arborescence is in fact well suited to many different uses of tree models. ASTs were merely the impetus: I have written too many of them.
+
+
+#Nodes
+
+Node types are _configured_ rather than _subclassed_. That is, instead of creating a new node type at compile time, a given node’s type is instead derived from its arity (0 for leaf nodes, and a) a fixed integer [e.g. 1 for unary nodes, 2 for binary, etc], b) n-ary, or c) some [potentially unbounded] range for branch nodes) and a string naming it (roughly analogous to and compatible with an XML or HTML tag name, e.g. “`ul`” or “`strong`”).
+
+This is done when the node itself is created:
+
+	RXLeafNodeRef textNode = RXLeafNodeCreate(CFSTR("text"), CFSTR("Some text"), kRXLeafNodeObjectCallBacks);
+	RXBranchNodeRef strongNode = RXBranchNodeCreate(CFSTR("strong"), (CFArrayRef)[NSArray arrayWithObject: (id)textNode]); // fixme: specify arity (unary)
+
+The above example demonstrates an Arborescence representation of the HTML snippet `<strong>Some text</strong>`[1]. Here `textNode` is a leaf node with a data pointer, while `strongNode` is a unary branch node. By the same token, you would create a div node similarly:
+
+	RXBranchNodeRef divNode = RXBranchNodeCreate(CFSTR("div"), childNodes); // fixme: specify arity (n-ary)
+
+The arity of a given node can also be restricted to a range, allowing you to specify that a given node must have at least `m` but no more than `n` child nodes. The latter, maximum, value can be supplied as a constant symbolizing an unbounded maximum for nodes which must have at least `m` child nodes with no upper bound.
+
+1: Note that RXLeafNodeRef can accept any arbitrary pointer as its data pointer, not just strings, so long as an appropriate callback struct is supplied (providing retain, release, and isEqual operations for the data).
+
+
+#Visitors
+
+As all operations specific to node types are implemented via Visitor pattern, Arborescence makes it easy to write visitors for a variety of purposes. Technically it uses a minor extension of Hierarchical Visitor pattern, having both a `visit` and a `leave` function (and allowing the visitor to ignore whole branches via the return value of the `visit` function).
+
+The main extension of the standard Hierarchical Visitor pattern is its (optional) ability to return the processed node from the `leave` function and have it be passed into the parent node’s `leave` function. This makes it particularly convenient and efficient to perform tree → tree mapping operations with visitors _without_ having to build a stack of objects in parallel to the control flow, pushing and popping contexts as tree nodes are visited and left. If this behaviour is undesired, returning `NULL` from the `leave` function will result in standard Hierarchical Visitor pattern behaviour.
+
+Visitors can be implemented manually by writing a subtype of RXTreeVisitor, or more conveniently can be specified by configuring one of the existing subtypes:
+
+- visit/leave function pointer callbacks for all nodes
+- visit/leave function pointer callbacks per node type
+- visit/leave blocks for all nodes
+- visit/leave blocks per node type
+- visit/leave delegate methods for all nodes
+- visit/leave delegate methods per node type
+
+The two varieties (“for all nodes” and “per node types”) allow you to write one pair of functions/blocks/methods which will be called for all visited nodes, or alternatively write individual functions/blocks/methods for each node type. In the case of function pointer and block callbacks per node type, these are stored in a dictionary which is indexed by the node type names, e.g. “text” and “strong” and “div” in our example above; for delegate methods, these are methods with selectors of the pattern `-visitor:visit<capitalized name>Node:` and `-visitor:leave<capitalized name>Node:withVisitedChildNodes:`[2].
+
+These mechanisms (for all nodes and per node type) are not exclusive; providing a function/block/method for all nodes will result in it being called if there is no per-type callback provided for the node[3].
+
+2: To be precise, the machinery is smart enough to call `-visitor:leave<capitalized name>Node:withVisitedChildNodes:`, `-visitor:leave<capitalized name>Node:withVisitedChildNode:`, and `-visitor:leave<capitalized name>Node:`, depending on availability (as determined by `-respondsToSelector:`) and the arity of the given node. Returning again to the HTML example above, the text node would result in a call to `-visitor:leaveTextNode:`, the strong node would result in a call to `-visitor:leaveStrongNode:withVisitedChildNode:`, and the div node would result in a call to `-visitor:leaveDivNode:withVisitedChildNodes:`, if these methods were available.
+
+3: It is possible to have the machinery call the generic callback even when a specific one is provided by implementing the specific callback machinery yourself within the generic callback. If this behaviour is desired within the library itself, it could be provided via a flag on the visitor.
+
+
+#Motivation
+
+This library was motivated by my prior work on [Hammer](http://github.com/robrix/hammer) and [hammerc](http://github.com/robrix/hammerc), where I first felt the desire to decouple the rule tree from the processing and compilation of individual rules. It was found that this design would allow greater reuse of the existing mechanisms while simultaneously lowering the barrier to extension of the rule tree types and compiler.
+
+During the development of Arborescence, I (unsurprisingly) found that the same properties which make it useful for representing Hammer’s rule tree also make it useful for providing the AST representation for the various other languages I have developed, and for software I have developed using Hammer to provide functionality to a given document based on the syntax tree it is parsed into. I find this notion of representing the parser rules and the parsed text with the same specific mechanism to be most pleasing.
