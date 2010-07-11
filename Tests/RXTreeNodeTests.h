@@ -10,6 +10,6 @@
 
 -(RXTreeNodeRef)createNode;
 
-@property (nonatomic, readonly) const char *expectedNodeName;
+@property (nonatomic, readonly) CFStringRef expectedNodeName;
 
 @end

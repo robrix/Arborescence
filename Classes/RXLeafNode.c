@@ -22,9 +22,9 @@ void RXLeafNodeSetData(RXLeafNodeRef self, void *data) {
 	:	data;
 }
 
-__strong RXLeafNodeRef RXLeafNodeCreate(const char *name, void *data, RXLeafNodeCallBacks callbacks) {
+__strong RXLeafNodeRef RXLeafNodeCreate(CFStringRef name, void *data, RXLeafNodeCallBacks callbacks) {
 	RXLeafNodeRef self = RXCreate(sizeof(RXLeafNode), &RXLeafNodeType);
-	self->name = name;
+	self->name = CFRetain(name);
 	self->callbacks = callbacks;
 	RXLeafNodeSetData(self, data);
 	return self;
@@ -34,6 +34,7 @@ void RXLeafNodeDeallocate(RXLeafNodeRef self) {
 	if(self->callbacks.release) {
 		self->callbacks.release(self->data);
 	}
+	CFRelease(self->name);
 }
 
 

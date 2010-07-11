@@ -13,8 +13,8 @@
 	return NULL;
 }
 
--(const char *)expectedNodeName {
-	return "";
+-(CFStringRef)expectedNodeName {
+	return CFSTR("");
 }
 
 
