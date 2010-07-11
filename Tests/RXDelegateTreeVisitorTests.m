@@ -10,6 +10,8 @@
 
 @implementation RXDelegateTreeVisitorTests
 
-
+-(RXTreeVisitorRef)createVisitor {
+	return NULL;
+}
 
 @end

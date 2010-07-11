@@ -5,6 +5,9 @@
 #include "RXTreeNode.h"
 #include "RXTreeVisitor.h"
 
+CFStringRef kRXTreeVisitorGenericCallBackKey = (CFStringRef)CFSTR("kRXTreeVisitorGenericCallBackKey");
+
+
 typedef struct RXTreeVisitor {
 	RX_FIELDS_FROM(RXTreeVisitor, RXTreeVisitorType);
 } RXTreeVisitor;

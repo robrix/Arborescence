@@ -10,5 +10,8 @@
 
 @implementation RXCallbackTreeVisitorTests
 
+-(RXTreeVisitorRef)createVisitor {
+	return NULL;
+}
 
 @end

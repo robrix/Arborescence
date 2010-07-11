@@ -27,4 +27,6 @@ typedef struct RXTreeVisitorType {
 bool RXTreeVisitorVisitNode(RXTreeVisitorRef self, RXTreeNodeRef node);
 void *RXTreeVisitorLeaveNode(RXTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes); // childNodes will be NULL for leaf nodes
 
+extern CFStringRef kRXTreeVisitorGenericCallBackKey;
+
 #endif // RX_TREE_VISITOR
