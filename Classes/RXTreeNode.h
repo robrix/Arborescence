@@ -5,6 +5,21 @@
 #ifndef RX_TREE_NODE
 #define RX_TREE_NODE
 
+#include "RXObject.h"
 
+typedef struct RXTreeNode * RXTreeNodeRef;
 
-#endif
+#define RX_FIELDS_FROM_RXTreeNode(_type) \
+	RX_FIELDS_FROM_RXObject(_type)\
+	const char *name;
+
+typedef struct RXTreeNodeType {
+	RX_METHODS_FROM(RXObjectType);
+} *RXTreeNodeTypeRef;
+
+__strong RXTreeNodeRef RXTreeNodeRetain(RXTreeNodeRef self);
+void RXTreeNodeRelease(RXTreeNodeRef self);
+
+__strong const char *RXTreeNodeGetName(RXTreeNodeRef self);
+
+#endif // RX_TREE_NODE

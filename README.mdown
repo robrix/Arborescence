@@ -1,0 +1,7 @@
+#Arborescence
+
+Writing abstract syntax trees entails a lot of duplication. Arborescence’s purpose is to represent purely the data in an abstract syntax tree—the individual leaf and branch nodes and their associated information—while also providing support for implementing the operations possible on the tree via the Visitor pattern.
+
+In short, Arborescence cares about the tree’s shape and storage, and how to perform arbitrary operations across its nodes; you, in turn, care about writing those operations; everyone lives happily ever after.
+
+Note that there’s nothing in here particularly specific to an abstract syntax tree vs. some other tree-shaped model; Arborescence is in fact well suited to many different uses of tree models. ASTs were merely the impetus: I have written too many of them.

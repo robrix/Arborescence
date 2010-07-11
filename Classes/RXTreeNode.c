@@ -4,4 +4,22 @@
 
 #include "RXTreeNode.h"
 
+// extern struct RXTreeNodeType RXTreeNodeType;
 
+typedef struct RXTreeNode {
+	RX_FIELDS_FROM(RXTreeNode, RXTreeNodeType);
+} RXTreeNode;
+
+
+__strong RXTreeNodeRef RXTreeNodeRetain(RXTreeNodeRef self) {
+	return RXRetain(self);
+}
+
+void RXTreeNodeRelease(RXTreeNodeRef self) {
+	RXRelease(self);
+}
+
+
+__strong const char *RXTreeNodeGetName(RXTreeNodeRef self) {
+	return self->name;
+}

@@ -1,7 +1,11 @@
-//
-// Prefix header for all source files of the 'Arborescence' target in the 'Arborescence' project.
-//
+// Arborescence.pch
+// Created by Rob Rix on 2010-07-10
+// Copyright 2010 Monochrome Industries
 
 #ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
+	#import <Foundation/Foundation.h>
+	
+	#ifdef ARBORESCENCE_TESTS
+		#import "RXAssertions.h"
+	#endif
 #endif
