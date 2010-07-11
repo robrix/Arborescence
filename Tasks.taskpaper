@@ -1,12 +1,13 @@
 Nodes:
 	- have a type name pointer. @done(2010-07-11)
 	- can be visited.
-
+	- have an arity range describing how many child nodes they will accept.
 	Leaf nodes:
 		- have a data pointer. @done(2010-07-11)
-
+		- are nullary.
 	Branch nodes:
-		- have child nodes. @done(2010-07-11)
+		- have any number of child nodes. @done(2010-07-11)
+		- have a definable arity range allowing fixed arity (unary, binary, ternary, etc) as well as n-arity.
 Visitors:
 	- generic, polymorphic implementation which can be overridden
 	- specific implementations:
