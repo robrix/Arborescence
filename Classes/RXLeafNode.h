@@ -11,17 +11,19 @@ typedef struct RXLeafNode * RXLeafNodeRef;
 
 typedef void *(*RXLeafNodeRetainCallBack)(void *value);
 typedef void (*RXLeafNodeReleaseCallBack)(void *value);
+typedef bool (*RXLeafNodeIsEqualCallBack)(void *a, void *b);
 
 typedef struct RXLeafNodeCallBacks {
 	RXIndex version;
 	RXLeafNodeRetainCallBack retain;
 	RXLeafNodeReleaseCallBack release;
+	RXLeafNodeIsEqualCallBack isEqual;
 } RXLeafNodeCallBacks;
 
 extern const RXLeafNodeCallBacks kRXLeafNodeObjectCallBacks;
 extern const RXLeafNodeCallBacks kRXLeafNodeFreeOnReleaseCallBacks;
 
-__strong RXLeafNodeRef RXLeafNodeCreate(const char *name, void *data, RXLeafNodeCallBacks callbacks);
+__strong RXLeafNodeRef RXLeafNodeCreate(CFStringRef name, void *data, RXLeafNodeCallBacks callbacks);
 
 __strong void *RXLeafNodeGetData(RXLeafNodeRef self);
 

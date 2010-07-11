@@ -14,8 +14,8 @@
 	return (RXTreeNodeRef)RXLeafNodeCreate(self.expectedNodeName, self, kRXLeafNodeObjectCallBacks);
 }
 
--(const char *)expectedNodeName {
-	return "leaf";
+-(CFStringRef)expectedNodeName {
+	return CFSTR("leaf");
 }
 
 

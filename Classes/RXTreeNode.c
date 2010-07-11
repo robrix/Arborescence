@@ -20,6 +20,6 @@ void RXTreeNodeRelease(RXTreeNodeRef self) {
 }
 
 
-__strong const char *RXTreeNodeGetName(RXTreeNodeRef self) {
+__strong CFStringRef RXTreeNodeGetName(RXTreeNodeRef self) {
 	return self->name;
 }

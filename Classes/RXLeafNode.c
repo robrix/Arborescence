@@ -16,15 +16,17 @@ typedef struct RXLeafNode {
 
 struct RXTreeNodeType RXLeafNodeType;
 
+
 void RXLeafNodeSetData(RXLeafNodeRef self, void *data) {
 	self->data = (self->callbacks.retain)
 	?	self->callbacks.retain(data)
 	:	data;
 }
 
-__strong RXLeafNodeRef RXLeafNodeCreate(const char *name, void *data, RXLeafNodeCallBacks callbacks) {
+
+__strong RXLeafNodeRef RXLeafNodeCreate(CFStringRef name, void *data, RXLeafNodeCallBacks callbacks) {
 	RXLeafNodeRef self = RXCreate(sizeof(RXLeafNode), &RXLeafNodeType);
-	self->name = name;
+	self->name = CFRetain(name);
 	self->callbacks = callbacks;
 	RXLeafNodeSetData(self, data);
 	return self;
@@ -34,6 +36,17 @@ void RXLeafNodeDeallocate(RXLeafNodeRef self) {
 	if(self->callbacks.release) {
 		self->callbacks.release(self->data);
 	}
+	CFRelease(self->name);
+}
+
+bool RXLeafNodeIsEqual(RXLeafNodeRef self, RXLeafNodeRef other) {
+	return
+		RXGetType(self) == RXGetType(other)
+	&&	CFEqual(self->name, other->name)
+	&&	(self->callbacks.isEqual
+		?	self->callbacks.isEqual(self->data, other->data)
+		:	(self->data == other->data)
+	);
 }
 
 
@@ -46,5 +59,5 @@ struct RXTreeNodeType RXLeafNodeType = {
 	.name = "RXLeafNode",
 	
 	.deallocate = (RXDeallocateMethod)RXLeafNodeDeallocate,
-	
+	.isEqual = (RXIsEqualMethod)RXLeafNodeIsEqual,
 };
