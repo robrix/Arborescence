@@ -50,6 +50,13 @@ bool RXLeafNodeIsEqual(RXLeafNodeRef self, RXLeafNodeRef other) {
 }
 
 
+void *RXLeafNodeAcceptVisitor(RXLeafNodeRef self, RXTreeVisitorRef visitor) {
+	return RXTreeVisitorVisitNode(visitor, (RXTreeNodeRef)self)
+	?	RXTreeVisitorLeaveNode(visitor, (RXTreeNodeRef)self, NULL)
+	:	NULL;
+}
+
+
 __strong void *RXLeafNodeGetData(RXLeafNodeRef self) {
 	return self->data;
 }
@@ -60,4 +67,6 @@ struct RXTreeNodeType RXLeafNodeType = {
 	
 	.deallocate = (RXDeallocateMethod)RXLeafNodeDeallocate,
 	.isEqual = (RXIsEqualMethod)RXLeafNodeIsEqual,
+	
+	.acceptVisitor = (RXTreeNodeAcceptVisitorMethod)RXLeafNodeAcceptVisitor,
 };

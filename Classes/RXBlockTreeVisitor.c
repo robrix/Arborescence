@@ -22,20 +22,20 @@ RXBlockTreeVisitorRef RXBlockTreeVisitorCreate(CFDictionaryRef visitBlocks, CFDi
 }
 
 void RXBlockTreeVisitorDeallocate(RXBlockTreeVisitorRef self) {
-	CFRelease(self->visitBlocks);
-	CFRelease(self->leaveBlocks);
+	if(self->visitBlocks) CFRelease(self->visitBlocks);
+	if(self->leaveBlocks) CFRelease(self->leaveBlocks);
 }
 
 
 bool RXBlockTreeVisitorVisit(RXBlockTreeVisitorRef self, RXTreeNodeRef node) {
-	RXBlockTreeVisitorVisitBlock block = self->visitBlocks ? CFDictionaryGetValue(self->visitBlocks, RXTreeNodeGetName(node)) : NULL;
+	RXBlockTreeVisitorVisitBlock block = self->visitBlocks ? (CFDictionaryGetValue(self->visitBlocks, RXTreeNodeGetName(node)) ?: CFDictionaryGetValue(self->visitBlocks, kRXTreeVisitorGenericCallBackKey)) : NULL;
 	return block
 	?	block(self, node)
 	:	1;
 }
 
 void *RXBlockTreeVisitorLeave(RXBlockTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes) {
-	RXBlockTreeVisitorLeaveBlock block = self->leaveBlocks ? CFDictionaryGetValue(self->leaveBlocks, RXTreeNodeGetName(node)) : NULL;
+	RXBlockTreeVisitorLeaveBlock block = self->leaveBlocks ? (CFDictionaryGetValue(self->leaveBlocks, RXTreeNodeGetName(node)) ?: CFDictionaryGetValue(self->leaveBlocks, kRXTreeVisitorGenericCallBackKey)) : NULL;
 	return block
 	?	block(self, node, childNodes)
 	:	NULL;

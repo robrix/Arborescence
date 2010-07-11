@@ -1,6 +1,6 @@
 Nodes:
 	- have a type name pointer. @done(2010-07-11)
-	- can be visited.
+	- can be visited. @done(2010-07-11)
 	- have an arity range describing how many child nodes they will accept.
 	- have a reference to their parent.
 	Leaf nodes:
@@ -11,11 +11,11 @@ Nodes:
 		- have a definable arity range allowing fixed arity (unary, binary, ternary, etc) as well as n-arity.
 		- should branch nodes specialize leaf nodes, i.e. should branch nodes have a data pointer? it seems restrictive to omit it.
 Visitors:
-	- generic, polymorphic implementation which can be overridden
+	- generic, polymorphic implementation which can be overridden @done(2010-07-11)
 	- specific implementations:
 		- call one visit callback and one leave callback with a node name parameter
-		- call one visit block and one leave block with a node name parameter
+		- call one visit block and one leave block with a node name parameter @done(2010-07-11)
 		- call one visit delegate method and one leave delegate method with a node name parameter
 		- look up visit/leave callbacks by node name in a dictionary
-		- look up visit/leave blocks by node name in a dictionary
+		- look up visit/leave blocks by node name in a dictionary @done(2010-07-11)
 		- call visit/leave delegate methods constructed with a node name
