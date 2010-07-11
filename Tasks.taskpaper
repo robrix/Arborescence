@@ -7,3 +7,10 @@ Nodes:
 
 	Branch nodes:
 		- have child nodes. @done(2010-07-11)
+Visitors:
+	- generic, polymorphic implementation which can be overridden
+	- specific implementations:
+		- call one visit callback and one leave callback with a node name parameter
+		- call one visit block and one leave block with a node name parameter
+		- look up visit/leave callbacks by node name in a dictionary
+		- look up visit/leave blocks by node name in a dictionary
