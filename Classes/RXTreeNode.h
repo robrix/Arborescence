@@ -11,7 +11,7 @@ typedef struct RXTreeNode * RXTreeNodeRef;
 
 #define RX_FIELDS_FROM_RXTreeNode(_type) \
 	RX_FIELDS_FROM_RXObject(_type)\
-	CFStringRef name;
+	__strong CFStringRef name;
 
 typedef struct RXTreeNodeType {
 	RX_METHODS_FROM(RXObjectType);
