@@ -11,6 +11,19 @@
 
 typedef struct RXTreeVisitor * RXTreeVisitorRef;
 
+#define RX_FIELDS_FROM_RXTreeVisitor(_type) \
+	RX_FIELDS_FROM_RXObject(_type);
+
+typedef bool (*RXTreeVisitorVisitMethod)(RXTreeVisitorRef self, RXTreeNodeRef node);
+typedef void *(*RXTreeVisitorLeaveMethod)(RXTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes);
+
+typedef struct RXTreeVisitorType {
+	RX_METHODS_FROM(RXObjectType);
+	
+	RXTreeVisitorVisitMethod visit;
+	RXTreeVisitorLeaveMethod leave;
+} *RXTreeVisitorTypeRef;
+
 bool RXTreeVisitorVisitNode(RXTreeVisitorRef self, RXTreeNodeRef node);
 void *RXTreeVisitorLeaveNode(RXTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes); // childNodes will be NULL for leaf nodes
 
