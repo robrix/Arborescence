@@ -6,7 +6,6 @@
 #import "RXTreeNodeTests.h"
 #import "RXLeafNode.h"
 
-
 @implementation RXTreeNodeTests
 
 -(RXTreeNodeRef)createNode {
@@ -30,6 +29,15 @@
 -(void)testHasANodeNamePointer {
 	if(node) {
 		RXAssertEquals(RXTreeNodeGetName(node), self.expectedNodeName);
+	}
+}
+
+
+-(void)testAcceptsVisitors {
+	if(node) {
+		// write a logging visitor
+		// call accept visitor on the node with the logging visitor
+		// compare its output to the expected manifest
 	}
 }
 
