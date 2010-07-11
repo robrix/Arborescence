@@ -18,11 +18,11 @@
 
 
 -(void)setUp {
-	node = RXTreeNodeRetain([self createNode]);
+	node = RXRetain([self createNode]);
 }
 
 -(void)tearDown {
-	RXTreeNodeRelease(node); node = NULL;
+	RXRelease(node); node = NULL;
 }
 
 

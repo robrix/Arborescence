@@ -23,9 +23,6 @@ typedef struct RXTreeNodeType {
 	RXTreeNodeAcceptVisitorMethod acceptVisitor;
 } *RXTreeNodeTypeRef;
 
-__strong RXTreeNodeRef RXTreeNodeRetain(RXTreeNodeRef self);
-void RXTreeNodeRelease(RXTreeNodeRef self);
-
 __strong CFStringRef RXTreeNodeGetName(RXTreeNodeRef self);
 
 void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor);

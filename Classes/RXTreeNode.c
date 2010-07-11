@@ -9,15 +9,6 @@ typedef struct RXTreeNode {
 } RXTreeNode;
 
 
-__strong RXTreeNodeRef RXTreeNodeRetain(RXTreeNodeRef self) {
-	return RXRetain(self);
-}
-
-void RXTreeNodeRelease(RXTreeNodeRef self) {
-	RXRelease(self);
-}
-
-
 __strong CFStringRef RXTreeNodeGetName(RXTreeNodeRef self) {
 	return self->name;
 }
