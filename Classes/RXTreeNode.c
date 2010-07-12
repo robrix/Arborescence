@@ -17,3 +17,21 @@ __strong CFStringRef RXTreeNodeGetName(RXTreeNodeRef self) {
 void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor) {
 	return self->type->acceptVisitor(self, visitor);
 }
+
+
+RXTreeNodeArity RXTreeNodeGetMinimumArity(RXTreeNodeRef self) {
+	return self->minimumArity;
+}
+
+RXTreeNodeArity RXTreeNodeGetMaximumArity(RXTreeNodeRef self) {
+	return self->maximumArity;
+}
+
+bool RXTreeNodeIsNullary(RXTreeNodeRef self) {
+	return (self->minimumArity == 0) && (self->maximumArity == 0);
+}
+
+bool RXTreeNodeIsUnary(RXTreeNodeRef self) {
+	return (self->minimumArity == 1) && (self->maximumArity == 1);
+}
+

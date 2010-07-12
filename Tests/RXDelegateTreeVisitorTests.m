@@ -10,15 +10,15 @@
 
 @implementation RXDelegateTreeVisitorTestsDelegate
 
--(id)visitor:(RXTreeVisitorRef)visitor leaveLeafNode:(RXTreeNodeRef)node withVisitedChildNodes:(NSArray *)childNodes {
+-(id)visitor:(RXTreeVisitorRef)visitor leaveLeafNode:(RXTreeNodeRef)node {
 	return @"leaf";
 }
 
--(id)visitor:(RXTreeVisitorRef)visitor leaveBranchNode:(RXTreeNodeRef)node withVisitedChildNodes:(NSArray *)childNodes {
-	return [NSString stringWithFormat: @"branch(%@)", [(NSArray *)childNodes componentsJoinedByString: @", "]];
+-(id)visitor:(RXTreeVisitorRef)visitor leaveBranchNode:(RXTreeNodeRef)node withVisitedChildren:(NSArray *)children {
+	return [NSString stringWithFormat: @"branch(%@)", [(NSArray *)children componentsJoinedByString: @", "]];
 }
 
--(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChildNodes:(NSArray *)childNodes {
+-(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChildren:(NSArray *)children {
 	return @"(whatever)";
 }
 
@@ -34,8 +34,8 @@
 	return NO;
 }
 
--(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChildNodes:(NSArray *)childNodes {
-	return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeGetName(node), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
+-(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChildren:(NSArray *)children {
+	return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeGetName(node), children ? [(NSArray *)children componentsJoinedByString: @", "] : @""];
 }
 
 @end

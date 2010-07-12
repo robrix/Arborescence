@@ -1,12 +1,13 @@
 Nodes:
 	- have a type name pointer. @done(2010-07-11)
 	- can be visited. @done(2010-07-11)
-	- have an arity range describing how many child nodes they will accept.
-	- unify leaf and branch nodes?
+	- have an arity range describing how many child nodes they will accept. @done(2010-07-12)
 	- have a reference to their parent.
+	- extract names and arity into a node type structure.
+	- unify leaf and branch nodes into a single class.
 	Leaf nodes:
 		- have a data pointer. @done(2010-07-11)
-		- are nullary.
+		- are nullary. @done(2010-07-12)
 	Branch nodes:
 		- have any number of child nodes. @done(2010-07-11)
 		- have a definable arity range allowing fixed arity (unary, binary, ternary, etc) as well as n-arity.

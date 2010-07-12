@@ -16,6 +16,8 @@ struct RXTreeNodeType RXBranchNodeType;
 __strong RXBranchNodeRef RXBranchNodeCreate(CFStringRef name, CFArrayRef childNodes) {
 	RXBranchNodeRef self = RXCreate(sizeof(RXBranchNode), &RXBranchNodeType);
 	self->name = CFRetain(name);
+	self->minimumArity = 0;
+	self->maximumArity = RXTreeNodeUnboundedArity;
 	self->childNodes = CFRetain(childNodes);
 	return self;
 }

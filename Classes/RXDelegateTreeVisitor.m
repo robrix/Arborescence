@@ -42,32 +42,19 @@ bool RXDelegateTreeVisitorVisit(RXDelegateTreeVisitorRef self, RXTreeNodeRef nod
 	);
 }
 
-void *RXDelegateTreeVisitorLeave(RXDelegateTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes) {
+void *RXDelegateTreeVisitorLeave(RXDelegateTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef children) {
 	id<RXDelegateTreeVisitorDelegate> delegate = self->delegate;
-	id child = (id)(childNodes && (CFArrayGetCount(childNodes) > 0)) ? CFArrayGetValueAtIndex(childNodes, 0) : NULL;
+	id child = (id)(children && (CFArrayGetCount(children) > 0)) ? CFArrayGetValueAtIndex(children, 0) : NULL;
 	SEL
-		nullary = NSSelectorFromString([NSString stringWithFormat: @"visitor:leave%@Node:", RXDelegateTreeVisitorNameForNode(node)]),
-		unary = NSSelectorFromString([NSString stringWithFormat: @"visitor:leave%@Node:withVisitedChildNode:", RXDelegateTreeVisitorNameForNode(node)]),
-		nary = NSSelectorFromString([NSString stringWithFormat: @"visitor:leave%@Node:withVisitedChildNodes:", RXDelegateTreeVisitorNameForNode(node)]),
-		genericNullary = @selector(visitor:leaveNode:),
-		genericUnary = @selector(visitor:leaveNode:withVisitedChildNode:),
-		genericNary = @selector(visitor:leaveNode:withVisitedChildNodes:);
-	return [delegate respondsToSelector: nullary]
-	?	[delegate performSelector: nullary withObject: (id)self withObject: (id)node]
-	:	([delegate respondsToSelector: unary]
-		?	objc_msgSend(delegate, unary, self, node, child)
-		:	([delegate respondsToSelector: nary]
-			?	objc_msgSend(delegate, nary, self, node, childNodes)
-			:	([delegate respondsToSelector: genericNullary]
-				?	[delegate visitor: (RXTreeVisitorRef)self leaveNode: node]
-				:	([delegate respondsToSelector: genericUnary]
-					?	[delegate visitor: (RXTreeVisitorRef)self leaveNode: node withVisitedChildNode: child]
-					:	([delegate respondsToSelector: genericNary]
-						?	[delegate visitor: (RXTreeVisitorRef)self leaveNode: node withVisitedChildNodes: (NSArray *)childNodes]
-						:	NULL
-					)
-				)
-			)
+		specific = NSSelectorFromString([NSString stringWithFormat: RXTreeNodeIsNullary(node) ? @"visitor:leave%@Node:" : (RXTreeNodeIsUnary(node) ? @"visitor:leave%@Node:withVisitedChild:" : @"visitor:leave%@Node:withVisitedChildren:"), RXDelegateTreeVisitorNameForNode(node)]),
+		generic = RXTreeNodeIsNullary(node) ? @selector(visitor:leaveNode:) : (RXTreeNodeIsUnary(node) ? @selector(visitor:leaveNode:withVisitedChild:) : @selector(visitor:leaveNode:withVisitedChildren:));
+	return [delegate respondsToSelector: specific]
+	?	objc_msgSend(delegate, specific, self, node, RXTreeNodeIsUnary(node) ? child : (id)children)
+	:	([delegate respondsToSelector: generic]
+		?	objc_msgSend(delegate, generic, self, node, RXTreeNodeIsUnary(node) ? child : (id)children)
+		:	([delegate respondsToSelector: @selector(visitor:leaveNode:withVisitedChildren:)]
+			?	objc_msgSend(delegate, @selector(visitor:leaveNode:withVisitedChildren:), self, node, children)
+			:	NULL
 		)
 	);
 }

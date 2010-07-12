@@ -27,6 +27,7 @@ void RXLeafNodeSetData(RXLeafNodeRef self, void *data) {
 __strong RXLeafNodeRef RXLeafNodeCreate(CFStringRef name, void *data, RXLeafNodeCallBacks callbacks) {
 	RXLeafNodeRef self = RXCreate(sizeof(RXLeafNode), &RXLeafNodeType);
 	self->name = CFRetain(name);
+	self->minimumArity = self->maximumArity = 0;
 	self->callbacks = callbacks;
 	RXLeafNodeSetData(self, data);
 	return self;
