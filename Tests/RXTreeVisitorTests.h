@@ -4,10 +4,9 @@
 
 #import "RXTreeNode.h"
 
-@interface RXTreeVisitorTests : SenTestCase {
-	RXTreeVisitorRef visitor;
-}
+@interface RXTreeVisitorTests : SenTestCase
 
--(RXTreeVisitorRef)createVisitor;
+-(RXTreeVisitorRef)visitor;
+-(RXTreeVisitorRef)filteringVisitor; // should skip nodes named “leaf”
 
 @end

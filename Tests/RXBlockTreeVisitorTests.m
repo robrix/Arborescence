@@ -11,7 +11,7 @@
 
 @implementation RXBlockTreeVisitorTests
 
--(RXTreeVisitorRef)createVisitor {
+-(RXTreeVisitorRef)visitor {
 	return (RXTreeVisitorRef)RXBlockTreeVisitorCreate(NULL, RXDictionary(
 		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
 			return @"leaf";
@@ -21,6 +21,18 @@
 		}, @"branch",
 		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
 			return @"(whatever)";
+		}, kRXTreeVisitorGenericCallBackKey,
+	NULL));
+}
+
+-(RXTreeVisitorRef)filteringVisitor {
+	return (RXTreeVisitorRef)RXBlockTreeVisitorCreate(RXDictionary(
+		^bool (RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode) {
+			return 0;
+		}, @"leaf",
+	NULL), RXDictionary(
+		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef childNodes) {
+			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeGetName(visitedNode), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
 		}, kRXTreeVisitorGenericCallBackKey,
 	NULL));
 }

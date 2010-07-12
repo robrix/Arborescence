@@ -9,32 +9,41 @@
 
 @implementation RXTreeVisitorTests
 
--(RXTreeVisitorRef)createVisitor {
+-(RXTreeVisitorRef)visitor {
+	return NULL;
+}
+
+-(RXTreeVisitorRef)filteringVisitor {
 	return NULL;
 }
 
 
--(void)setUp {
-	visitor = RXRetain([self createVisitor]);
-}
-
--(void)tearDown {
-	RXRelease(visitor); visitor = NULL;
+-(RXTreeNodeRef)tree {
+	return (RXTreeNodeRef)RXBranchNodeCreate(CFSTR("branch"), RXArray(
+		RXLeafNodeCreate(CFSTR("leaf"), NULL, (RXLeafNodeCallBacks){0}),
+		RXBranchNodeCreate(CFSTR("branch"), RXArray(
+			RXLeafNodeCreate(CFSTR("leaf"), NULL, (RXLeafNodeCallBacks){0}),
+			RXBranchNodeCreate(CFSTR("foo"), (CFArrayRef)[NSArray array]),
+		NULL)),
+		RXLeafNodeCreate(CFSTR("bar"), NULL, (RXLeafNodeCallBacks){0}),
+	NULL));
 }
 
 
 -(void)testVisitsNodes {
+	RXTreeVisitorRef visitor = self.visitor;
 	if(visitor) {
-		RXTreeNodeRef node = (RXTreeNodeRef)RXBranchNodeCreate(CFSTR("branch"), RXArray(
-			RXLeafNodeCreate(CFSTR("leaf"), NULL, (RXLeafNodeCallBacks){0}),
-			RXBranchNodeCreate(CFSTR("branch"), RXArray(
-				RXLeafNodeCreate(CFSTR("leaf"), NULL, (RXLeafNodeCallBacks){0}),
-				RXBranchNodeCreate(CFSTR("foo"), (CFArrayRef)[NSArray array]),
-			NULL)),
-			RXLeafNodeCreate(CFSTR("bar"), NULL, (RXLeafNodeCallBacks){0}),
-		NULL));
 		NSString *expected = @"branch(leaf, branch(leaf, (whatever)), (whatever))";
-		NSString *actual = RXTreeNodeAcceptVisitor(node, visitor);
+		NSString *actual = RXTreeNodeAcceptVisitor(self.tree, visitor);
+		RXAssertEquals(actual, expected);
+	}
+}
+
+-(void)testCanSkipHierarchies {
+	RXTreeVisitorRef visitor = self.filteringVisitor;
+	if(visitor) {
+		NSString *expected = @"branch(branch(foo()), bar())";
+		NSString *actual = RXTreeNodeAcceptVisitor(self.tree, visitor);
 		RXAssertEquals(actual, expected);
 	}
 }
