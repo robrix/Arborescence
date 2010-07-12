@@ -11,5 +11,6 @@
 -(RXTreeNodeRef)createNode;
 
 @property (nonatomic, readonly) CFStringRef expectedNodeName;
+@property (nonatomic, readonly) NSString *expectedManifest;
 
 @end

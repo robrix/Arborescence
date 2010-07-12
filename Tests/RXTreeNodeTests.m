@@ -2,9 +2,11 @@
 // Created by Rob Rix on 2010-07-10
 // Copyright 2010 Monochrome Industries
 
+#import "RXBlockTreeVisitor.h"
 #import "RXTreeNode.h"
 #import "RXTreeNodeTests.h"
 #import "RXLeafNode.h"
+#import "RXCoreFoundationIntegration.h"
 
 @implementation RXTreeNodeTests
 
@@ -14,6 +16,19 @@
 
 -(CFStringRef)expectedNodeName {
 	return CFSTR("");
+}
+
+-(NSString *)expectedManifest {
+	return nil;
+}
+
+
+-(RXTreeVisitorRef)loggingVisitor {
+	return (RXTreeVisitorRef)RXBlockTreeVisitorCreate(NULL, RXDictionary(
+		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef childNodes) {
+			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeGetName(visitedNode), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
+		}, kRXTreeVisitorGenericCallBackKey,
+	NULL));
 }
 
 
@@ -35,9 +50,8 @@
 
 -(void)testAcceptsVisitors {
 	if(node) {
-		// write a logging visitor
-		// call accept visitor on the node with the logging visitor
-		// compare its output to the expected manifest
+		NSString *result = RXTreeNodeAcceptVisitor(node, self.loggingVisitor);
+		RXAssertEquals(result, self.expectedManifest);
 	}
 }
 
