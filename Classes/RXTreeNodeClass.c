@@ -28,7 +28,7 @@ RXTreeNodeClassRef RXTreeNodeClassCreateFixed(CFStringRef name, RXArity arity) {
 
 RXTreeNodeClassRef RXTreeNodeClassCreate(CFStringRef name, RXArity minimumArity, RXArity maximumArity) {
 	RXTreeNodeClassRef self = RXCreate(sizeof(RXTreeNodeClass), &RXTreeNodeClassType);
-	self->name = CFRetain(name);
+	self->name = CFStringCreateCopy(NULL, name);
 	self->minimumArity = minimumArity;
 	self->maximumArity = maximumArity;
 	return self;
