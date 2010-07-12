@@ -18,6 +18,10 @@
 	return CFSTR("leaf");
 }
 
+-(NSString *)expectedManifest {
+	return @"leaf()";
+}
+
 
 -(void)testHasDataPointer {
 	RXAssertEquals(RXLeafNodeGetData((RXLeafNodeRef)node), self);

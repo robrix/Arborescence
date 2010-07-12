@@ -33,6 +33,24 @@ bool RXBranchNodeIsEqual(RXBranchNodeRef self, RXBranchNodeRef other) {
 }
 
 
+void *RXBranchNodeAcceptVisitor(RXBranchNodeRef self, RXTreeVisitorRef visitor) {
+	void *result = NULL;
+	if(RXTreeVisitorVisitNode(visitor, (RXTreeNodeRef)self)) {
+		CFArrayRef childNodes = RXBranchNodeGetChildNodes(self);
+		CFIndex count = CFArrayGetCount(childNodes);
+		CFMutableArrayRef visitedChildNodes = CFArrayCreateMutable(NULL, count, &kCFTypeArrayCallBacks);
+		for(CFIndex i = 0; i < count; i++) {
+			RXTreeNodeRef visitedChildNode = RXTreeNodeAcceptVisitor((RXTreeNodeRef)CFArrayGetValueAtIndex(childNodes, i), visitor);
+			if(visitedChildNode) {
+				CFArrayAppendValue(visitedChildNodes, visitedChildNode);
+			}
+		}
+		result = RXTreeVisitorLeaveNode(visitor, (RXTreeNodeRef)self, visitedChildNodes);
+	}
+	return result;
+}
+
+
 __strong CFArrayRef RXBranchNodeGetChildNodes(RXBranchNodeRef self) {
 	return self->childNodes;
 }
@@ -43,4 +61,6 @@ struct RXTreeNodeType RXBranchNodeType = {
 	
 	.deallocate = (RXDeallocateMethod)RXBranchNodeDeallocate,
 	.isEqual = (RXIsEqualMethod)RXBranchNodeIsEqual,
+	
+	.acceptVisitor = (RXTreeNodeAcceptVisitorMethod)RXBranchNodeAcceptVisitor,
 };

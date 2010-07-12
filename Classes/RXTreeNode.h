@@ -9,17 +9,22 @@
 
 typedef struct RXTreeNode * RXTreeNodeRef;
 
+#include "RXTreeVisitor.h"
+
 #define RX_FIELDS_FROM_RXTreeNode(_type) \
 	RX_FIELDS_FROM_RXObject(_type)\
 	__strong CFStringRef name;
 
+typedef void *(*RXTreeNodeAcceptVisitorMethod)(RXTreeNodeRef self, RXTreeVisitorRef visitor);
+
 typedef struct RXTreeNodeType {
 	RX_METHODS_FROM(RXObjectType);
+	
+	RXTreeNodeAcceptVisitorMethod acceptVisitor;
 } *RXTreeNodeTypeRef;
 
-__strong RXTreeNodeRef RXTreeNodeRetain(RXTreeNodeRef self);
-void RXTreeNodeRelease(RXTreeNodeRef self);
-
 __strong CFStringRef RXTreeNodeGetName(RXTreeNodeRef self);
+
+void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor);
 
 #endif // RX_TREE_NODE

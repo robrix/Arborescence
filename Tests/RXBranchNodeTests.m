@@ -24,6 +24,10 @@
 	return CFSTR("branch");
 }
 
+-(NSString *)expectedManifest {
+	return @"branch(leaf1(), leaf2())";
+}
+
 
 -(void)testHasChildNodes {
 	RXAssertEquals(RXBranchNodeGetChildNodes((RXBranchNodeRef)node), self.childNodes);
