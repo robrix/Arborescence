@@ -13,11 +13,15 @@
 @implementation RXBranchNodeTests
 
 -(CFArrayRef)childNodes {
-	return RXArray(RXLeafNodeCreate(CFSTR("leaf1"), self, kRXLeafNodeObjectCallBacks), RXLeafNodeCreate(CFSTR("leaf2"), self, kRXLeafNodeObjectCallBacks), NULL);
+	return RXArray(RXLeafNodeCreate(RXTreeNodeClassCreateLeaf(CFSTR("leaf1")), self, kRXLeafNodeObjectCallBacks), RXLeafNodeCreate(RXTreeNodeClassCreateLeaf(CFSTR("leaf2")), self, kRXLeafNodeObjectCallBacks), NULL);
 }
 
 -(RXTreeNodeRef)createNode {
-	return (RXTreeNodeRef)RXBranchNodeCreate(self.expectedNodeName, self.childNodes);
+	return (RXTreeNodeRef)RXBranchNodeCreate(nodeClass, self.childNodes);
+}
+
+-(RXTreeNodeClassRef)nodeClass {
+	return RXTreeNodeClassCreateBranch(self.expectedNodeName);
 }
 
 -(CFStringRef)expectedNodeName {

@@ -3,7 +3,7 @@ Nodes:
 	- can be visited. @done(2010-07-11)
 	- have an arity range describing how many child nodes they will accept. @done(2010-07-12)
 	- have a reference to their parent.
-	- extract names and arity into a node type structure.
+	- extract names and arity into a node type structure. @done(2010-07-12)
 	- unify leaf and branch nodes into a single class.
 	Leaf nodes:
 		- have a data pointer. @done(2010-07-11)

@@ -35,7 +35,7 @@
 }
 
 -(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChildren:(NSArray *)children {
-	return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeGetName(node), children ? [(NSArray *)children componentsJoinedByString: @", "] : @""];
+	return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node)), children ? [(NSArray *)children componentsJoinedByString: @", "] : @""];
 }
 
 @end

@@ -6,9 +6,12 @@
 
 @interface RXTreeNodeTests : SenTestCase {
 	RXTreeNodeRef node;
+	RXTreeNodeClassRef nodeClass;
 }
 
 -(RXTreeNodeRef)createNode;
+
+@property (nonatomic, readonly) RXTreeNodeClassRef nodeClass;
 
 @property (nonatomic, readonly) CFStringRef expectedNodeName;
 @property (nonatomic, readonly) NSString *expectedManifest;

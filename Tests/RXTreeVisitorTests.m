@@ -19,13 +19,18 @@
 
 
 -(RXTreeNodeRef)tree {
-	return (RXTreeNodeRef)RXBranchNodeCreate(CFSTR("branch"), RXArray(
-		RXLeafNodeCreate(CFSTR("leaf"), NULL, (RXLeafNodeCallBacks){0}),
-		RXBranchNodeCreate(CFSTR("branch"), RXArray(
-			RXLeafNodeCreate(CFSTR("leaf"), NULL, (RXLeafNodeCallBacks){0}),
-			RXBranchNodeCreate(CFSTR("foo"), (CFArrayRef)[NSArray array]),
+	RXTreeNodeClassRef
+		leafClass = RXTreeNodeClassCreateLeaf(CFSTR("leaf")),
+		branchClass = RXTreeNodeClassCreateBranch(CFSTR("branch")),
+		fooClass = RXTreeNodeClassCreateBranch(CFSTR("foo")),
+		barClass = RXTreeNodeClassCreateLeaf(CFSTR("bar"));
+	return (RXTreeNodeRef)RXBranchNodeCreate(branchClass, RXArray(
+		RXLeafNodeCreate(leafClass, NULL, (RXLeafNodeCallBacks){0}),
+		RXBranchNodeCreate(branchClass, RXArray(
+			RXLeafNodeCreate(leafClass, NULL, (RXLeafNodeCallBacks){0}),
+			RXBranchNodeCreate(fooClass, (CFArrayRef)[NSArray array]),
 		NULL)),
-		RXLeafNodeCreate(CFSTR("bar"), NULL, (RXLeafNodeCallBacks){0}),
+		RXLeafNodeCreate(barClass, NULL, (RXLeafNodeCallBacks){0}),
 	NULL));
 }
 

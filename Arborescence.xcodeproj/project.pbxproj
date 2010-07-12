@@ -36,6 +36,8 @@
 		D405868111EB0BD00072A54E /* RXCallbackTreeVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D405867F11EB0BD00072A54E /* RXCallbackTreeVisitor.h */; };
 		D40586C111EB12A50072A54E /* RXDelegateTreeVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = D40586BF11EB12A50072A54E /* RXDelegateTreeVisitor.m */; };
 		D40586C211EB12A50072A54E /* RXDelegateTreeVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D40586C011EB12A50072A54E /* RXDelegateTreeVisitor.h */; };
+		D405871811EBA7060072A54E /* RXTreeNodeClass.c in Sources */ = {isa = PBXBuildFile; fileRef = D405871611EBA7060072A54E /* RXTreeNodeClass.c */; };
+		D405871911EBA7060072A54E /* RXTreeNodeClass.h in Headers */ = {isa = PBXBuildFile; fileRef = D405871711EBA7060072A54E /* RXTreeNodeClass.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,8 @@
 		D405867F11EB0BD00072A54E /* RXCallbackTreeVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXCallbackTreeVisitor.h; sourceTree = "<group>"; };
 		D40586BF11EB12A50072A54E /* RXDelegateTreeVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXDelegateTreeVisitor.m; sourceTree = "<group>"; };
 		D40586C011EB12A50072A54E /* RXDelegateTreeVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXDelegateTreeVisitor.h; sourceTree = "<group>"; };
+		D405871611EBA7060072A54E /* RXTreeNodeClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RXTreeNodeClass.c; sourceTree = "<group>"; };
+		D405871711EBA7060072A54E /* RXTreeNodeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXTreeNodeClass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,8 @@
 				D405855211E925B30072A54E /* RXLeafNode.h */,
 				D40582ED11E47C1C0072A54E /* RXTreeNode.c */,
 				D40582EE11E47C1C0072A54E /* RXTreeNode.h */,
+				D405871611EBA7060072A54E /* RXTreeNodeClass.c */,
+				D405871711EBA7060072A54E /* RXTreeNodeClass.h */,
 				D40585A611E9A0010072A54E /* RXTreeVisitor.c */,
 				D40585A711E9A0010072A54E /* RXTreeVisitor.h */,
 			);
@@ -279,6 +285,7 @@
 				D405862411E9BDB40072A54E /* RXBlockTreeVisitor.h in Headers */,
 				D405868111EB0BD00072A54E /* RXCallbackTreeVisitor.h in Headers */,
 				D40586C211EB12A50072A54E /* RXDelegateTreeVisitor.h in Headers */,
+				D405871911EBA7060072A54E /* RXTreeNodeClass.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +409,7 @@
 				D405862311E9BDB40072A54E /* RXBlockTreeVisitor.c in Sources */,
 				D405868011EB0BD00072A54E /* RXCallbackTreeVisitor.c in Sources */,
 				D40586C111EB12A50072A54E /* RXDelegateTreeVisitor.m in Sources */,
+				D405871811EBA7060072A54E /* RXTreeNodeClass.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

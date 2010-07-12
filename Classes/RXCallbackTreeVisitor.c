@@ -45,14 +45,14 @@ void RXCallbackTreeVisitorDeallocate(RXCallbackTreeVisitorRef self) {
 
 
 bool RXCallbackTreeVisitorVisit(RXCallbackTreeVisitorRef self, RXTreeNodeRef node) {
-	RXCallbackTreeVisitorVisitFunction function = self->visitCallbacks ? (CFDictionaryGetValue(self->visitCallbacks, RXTreeNodeGetName(node)) ?: CFDictionaryGetValue(self->visitCallbacks, kRXTreeVisitorGenericCallBackKey)) : NULL;
+	RXCallbackTreeVisitorVisitFunction function = self->visitCallbacks ? (CFDictionaryGetValue(self->visitCallbacks, RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node))) ?: CFDictionaryGetValue(self->visitCallbacks, kRXTreeVisitorGenericCallBackKey)) : NULL;
 	return function
 	?	function(self, node)
 	:	1;
 }
 
 void *RXCallbackTreeVisitorLeave(RXCallbackTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes) {
-	RXCallbackTreeVisitorLeaveFunction function = self->leaveCallbacks ? (CFDictionaryGetValue(self->leaveCallbacks, RXTreeNodeGetName(node)) ?: CFDictionaryGetValue(self->leaveCallbacks, kRXTreeVisitorGenericCallBackKey)) : NULL;
+	RXCallbackTreeVisitorLeaveFunction function = self->leaveCallbacks ? (CFDictionaryGetValue(self->leaveCallbacks, RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node))) ?: CFDictionaryGetValue(self->leaveCallbacks, kRXTreeVisitorGenericCallBackKey)) : NULL;
 	return function
 	?	function(self, node, childNodes)
 	:	NULL;

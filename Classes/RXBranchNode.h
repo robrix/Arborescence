@@ -9,7 +9,7 @@
 
 typedef struct RXBranchNode * RXBranchNodeRef;
 
-__strong RXBranchNodeRef RXBranchNodeCreate(CFStringRef name, CFArrayRef childNodes);
+__strong RXBranchNodeRef RXBranchNodeCreate(RXTreeNodeClassRef nodeClass, CFArrayRef childNodes);
 
 __strong CFArrayRef RXBranchNodeGetChildNodes(RXBranchNodeRef self);
 

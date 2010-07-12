@@ -11,7 +11,11 @@
 @implementation RXLeafNodeTests
 
 -(RXTreeNodeRef)createNode {
-	return (RXTreeNodeRef)RXLeafNodeCreate(self.expectedNodeName, self, kRXLeafNodeObjectCallBacks);
+	return (RXTreeNodeRef)RXLeafNodeCreate(nodeClass, self, kRXLeafNodeObjectCallBacks);
+}
+
+-(RXTreeNodeClassRef)nodeClass {
+	return RXTreeNodeClassCreateLeaf(self.expectedNodeName);
 }
 
 -(CFStringRef)expectedNodeName {

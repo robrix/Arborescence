@@ -14,6 +14,10 @@
 	return NULL;
 }
 
+-(RXTreeNodeClassRef)nodeClass {
+	return NULL;
+}
+
 -(CFStringRef)expectedNodeName {
 	return CFSTR("");
 }
@@ -26,25 +30,20 @@
 -(RXTreeVisitorRef)loggingVisitor {
 	return (RXTreeVisitorRef)RXBlockTreeVisitorCreate(NULL, RXDictionary(
 		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef childNodes) {
-			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeGetName(visitedNode), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
+			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
 		}, kRXTreeVisitorGenericCallBackKey,
 	NULL));
 }
 
 
 -(void)setUp {
+	nodeClass = RXRetain([self nodeClass]);
 	node = RXRetain([self createNode]);
 }
 
 -(void)tearDown {
 	RXRelease(node); node = NULL;
-}
-
-
--(void)testHasANodeNamePointer {
-	if(node) {
-		RXAssertEquals(RXTreeNodeGetName(node), self.expectedNodeName);
-	}
+	RXRelease(nodeClass); nodeClass = NULL;
 }
 
 

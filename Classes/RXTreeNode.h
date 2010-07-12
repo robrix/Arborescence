@@ -8,16 +8,13 @@
 #include "RXObject.h"
 
 typedef struct RXTreeNode * RXTreeNodeRef;
-typedef RXIndex RXTreeNodeArity;
 
-#define RXTreeNodeUnboundedArity RXIndexMax;
-
+#include "RXTreeNodeClass.h"
 #include "RXTreeVisitor.h"
 
 #define RX_FIELDS_FROM_RXTreeNode(_type) \
 	RX_FIELDS_FROM_RXObject(_type)\
-	__strong CFStringRef name;\
-	RXTreeNodeArity minimumArity, maximumArity;
+	__strong RXTreeNodeClassRef nodeClass;
 
 typedef void *(*RXTreeNodeAcceptVisitorMethod)(RXTreeNodeRef self, RXTreeVisitorRef visitor);
 
@@ -27,13 +24,10 @@ typedef struct RXTreeNodeType {
 	RXTreeNodeAcceptVisitorMethod acceptVisitor;
 } *RXTreeNodeTypeRef;
 
-__strong CFStringRef RXTreeNodeGetName(RXTreeNodeRef self);
+
 
 void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor);
 
-RXTreeNodeArity RXTreeNodeGetMinimumArity(RXTreeNodeRef self);
-RXTreeNodeArity RXTreeNodeGetMaximumArity(RXTreeNodeRef self);
-bool RXTreeNodeIsNullary(RXTreeNodeRef self);
-bool RXTreeNodeIsUnary(RXTreeNodeRef self);
+RXTreeNodeClassRef RXTreeNodeGetNodeClass(RXTreeNodeRef self);
 
 #endif // RX_TREE_NODE

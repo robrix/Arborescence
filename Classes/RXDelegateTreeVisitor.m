@@ -27,7 +27,8 @@ void RXDelegateTreeVisitorDeallocate(RXDelegateTreeVisitorRef self) {
 
 NSString *RXDelegateTreeVisitorNameForNode(RXTreeNodeRef node) {
 	NSRange first = NSMakeRange(0, 1);
-	return [(NSString *)RXTreeNodeGetName(node) stringByReplacingCharactersInRange: first withString: [[(NSString *)RXTreeNodeGetName(node) substringWithRange: first] uppercaseString]];
+	NSString *name = (NSString *)RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node));
+	return [name stringByReplacingCharactersInRange: first withString: [[name substringWithRange: first] uppercaseString]];
 }
 
 
@@ -46,12 +47,12 @@ void *RXDelegateTreeVisitorLeave(RXDelegateTreeVisitorRef self, RXTreeNodeRef no
 	id<RXDelegateTreeVisitorDelegate> delegate = self->delegate;
 	id child = (id)(children && (CFArrayGetCount(children) > 0)) ? CFArrayGetValueAtIndex(children, 0) : NULL;
 	SEL
-		specific = NSSelectorFromString([NSString stringWithFormat: RXTreeNodeIsNullary(node) ? @"visitor:leave%@Node:" : (RXTreeNodeIsUnary(node) ? @"visitor:leave%@Node:withVisitedChild:" : @"visitor:leave%@Node:withVisitedChildren:"), RXDelegateTreeVisitorNameForNode(node)]),
-		generic = RXTreeNodeIsNullary(node) ? @selector(visitor:leaveNode:) : (RXTreeNodeIsUnary(node) ? @selector(visitor:leaveNode:withVisitedChild:) : @selector(visitor:leaveNode:withVisitedChildren:));
+		specific = NSSelectorFromString([NSString stringWithFormat: RXTreeNodeClassIsNullary(RXTreeNodeGetNodeClass(node)) ? @"visitor:leave%@Node:" : (RXTreeNodeClassIsUnary(RXTreeNodeGetNodeClass(node)) ? @"visitor:leave%@Node:withVisitedChild:" : @"visitor:leave%@Node:withVisitedChildren:"), RXDelegateTreeVisitorNameForNode(node)]),
+		generic = RXTreeNodeClassIsNullary(RXTreeNodeGetNodeClass(node)) ? @selector(visitor:leaveNode:) : (RXTreeNodeClassIsUnary(RXTreeNodeGetNodeClass(node)) ? @selector(visitor:leaveNode:withVisitedChild:) : @selector(visitor:leaveNode:withVisitedChildren:));
 	return [delegate respondsToSelector: specific]
-	?	objc_msgSend(delegate, specific, self, node, RXTreeNodeIsUnary(node) ? child : (id)children)
+	?	objc_msgSend(delegate, specific, self, node, RXTreeNodeClassIsUnary(RXTreeNodeGetNodeClass(node)) ? child : (id)children)
 	:	([delegate respondsToSelector: generic]
-		?	objc_msgSend(delegate, generic, self, node, RXTreeNodeIsUnary(node) ? child : (id)children)
+		?	objc_msgSend(delegate, generic, self, node, RXTreeNodeClassIsUnary(RXTreeNodeGetNodeClass(node)) ? child : (id)children)
 		:	([delegate respondsToSelector: @selector(visitor:leaveNode:withVisitedChildren:)]
 			?	objc_msgSend(delegate, @selector(visitor:leaveNode:withVisitedChildren:), self, node, children)
 			:	NULL

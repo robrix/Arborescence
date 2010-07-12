@@ -23,7 +23,7 @@ typedef struct RXLeafNodeCallBacks {
 extern const RXLeafNodeCallBacks kRXLeafNodeObjectCallBacks;
 extern const RXLeafNodeCallBacks kRXLeafNodeFreeOnReleaseCallBacks;
 
-__strong RXLeafNodeRef RXLeafNodeCreate(CFStringRef name, void *data, RXLeafNodeCallBacks callbacks);
+__strong RXLeafNodeRef RXLeafNodeCreate(RXTreeNodeClassRef nodeClass, void *data, RXLeafNodeCallBacks callbacks);
 
 __strong void *RXLeafNodeGetData(RXLeafNodeRef self);
 

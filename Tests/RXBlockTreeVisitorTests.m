@@ -32,7 +32,7 @@
 		}, @"leaf",
 	NULL), RXDictionary(
 		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef childNodes) {
-			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeGetName(visitedNode), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
+			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
 		}, kRXTreeVisitorGenericCallBackKey,
 	NULL));
 }

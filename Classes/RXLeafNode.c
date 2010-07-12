@@ -24,10 +24,9 @@ void RXLeafNodeSetData(RXLeafNodeRef self, void *data) {
 }
 
 
-__strong RXLeafNodeRef RXLeafNodeCreate(CFStringRef name, void *data, RXLeafNodeCallBacks callbacks) {
+__strong RXLeafNodeRef RXLeafNodeCreate(RXTreeNodeClassRef nodeClass, void *data, RXLeafNodeCallBacks callbacks) {
 	RXLeafNodeRef self = RXCreate(sizeof(RXLeafNode), &RXLeafNodeType);
-	self->name = CFRetain(name);
-	self->minimumArity = self->maximumArity = 0;
+	self->nodeClass = RXRetain(nodeClass);
 	self->callbacks = callbacks;
 	RXLeafNodeSetData(self, data);
 	return self;
@@ -37,13 +36,13 @@ void RXLeafNodeDeallocate(RXLeafNodeRef self) {
 	if(self->callbacks.release) {
 		self->callbacks.release(self->data);
 	}
-	CFRelease(self->name);
+	RXRelease(self->nodeClass);
 }
 
 bool RXLeafNodeIsEqual(RXLeafNodeRef self, RXLeafNodeRef other) {
 	return
 		RXGetType(self) == RXGetType(other)
-	&&	CFEqual(self->name, other->name)
+	&&	RXEquals(self->nodeClass, other->nodeClass)
 	&&	(self->callbacks.isEqual
 		?	self->callbacks.isEqual(self->data, other->data)
 		:	(self->data == other->data)

@@ -13,24 +13,22 @@ typedef struct RXBranchNode {
 struct RXTreeNodeType RXBranchNodeType;
 
 
-__strong RXBranchNodeRef RXBranchNodeCreate(CFStringRef name, CFArrayRef childNodes) {
+__strong RXBranchNodeRef RXBranchNodeCreate(RXTreeNodeClassRef nodeClass, CFArrayRef childNodes) {
 	RXBranchNodeRef self = RXCreate(sizeof(RXBranchNode), &RXBranchNodeType);
-	self->name = CFRetain(name);
-	self->minimumArity = 0;
-	self->maximumArity = RXTreeNodeUnboundedArity;
+	self->nodeClass = RXRetain(nodeClass);
 	self->childNodes = CFRetain(childNodes);
 	return self;
 }
 
 void RXBranchNodeDeallocate(RXBranchNodeRef self) {
-	CFRelease(self->name);
+	RXRelease(self->nodeClass);
 	CFRelease(self->childNodes);
 }
 
 bool RXBranchNodeIsEqual(RXBranchNodeRef self, RXBranchNodeRef other) {
 	return
 		RXGetType(self) == RXGetType(other)
-	&&	CFEqual(self->name, other->name)
+	&&	RXEquals(self->nodeClass, other->nodeClass)
 	&&	CFEqual(self->childNodes, other->childNodes);
 }
 
