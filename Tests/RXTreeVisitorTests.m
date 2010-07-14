@@ -2,9 +2,8 @@
 // Created by Rob Rix on 2010-07-11
 // Copyright 2010 Monochrome Industries
 
+#import "RXTreeNode.h"
 #import "RXTreeVisitorTests.h"
-#import "RXBranchNode.h"
-#import "RXLeafNode.h"
 #import "RXCoreFoundationIntegration.h"
 
 @implementation RXTreeVisitorTests
@@ -24,13 +23,13 @@
 		branchClass = RXTreeNodeClassCreateBranch(CFSTR("branch")),
 		fooClass = RXTreeNodeClassCreateBranch(CFSTR("foo")),
 		barClass = RXTreeNodeClassCreateLeaf(CFSTR("bar"));
-	return (RXTreeNodeRef)RXBranchNodeCreate(branchClass, RXArray(
-		RXLeafNodeCreate(leafClass, NULL, (RXLeafNodeCallBacks){0}),
-		RXBranchNodeCreate(branchClass, RXArray(
-			RXLeafNodeCreate(leafClass, NULL, (RXLeafNodeCallBacks){0}),
-			RXBranchNodeCreate(fooClass, (CFArrayRef)[NSArray array]),
+	return (RXTreeNodeRef)RXTreeNodeCreateBranch(branchClass, RXArray(
+		RXTreeNodeCreateLeaf(leafClass, NULL),
+		RXTreeNodeCreateBranch(branchClass, RXArray(
+			RXTreeNodeCreateLeaf(leafClass, NULL),
+			RXTreeNodeCreateBranch(fooClass, (CFArrayRef)[NSArray array]),
 		NULL)),
-		RXLeafNodeCreate(barClass, NULL, (RXLeafNodeCallBacks){0}),
+		RXTreeNodeCreateLeaf(barClass, NULL),
 	NULL));
 }
 

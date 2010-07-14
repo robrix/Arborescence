@@ -11,7 +11,7 @@
 typedef struct RXCallbackTreeVisitor * RXCallbackTreeVisitorRef;
 
 typedef bool (*RXCallbackTreeVisitorVisitFunction)(RXCallbackTreeVisitorRef self, RXTreeNodeRef node);
-typedef void *(*RXCallbackTreeVisitorLeaveFunction)(RXCallbackTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes);
+typedef void *(*RXCallbackTreeVisitorLeaveFunction)(RXCallbackTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef children);
 
 CFDictionaryRef RXCallbackDictionaryCreate(void *function, ...) RX_REQUIRES_NULL_TERMINATION;
 

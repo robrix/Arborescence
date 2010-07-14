@@ -51,10 +51,10 @@ bool RXCallbackTreeVisitorVisit(RXCallbackTreeVisitorRef self, RXTreeNodeRef nod
 	:	1;
 }
 
-void *RXCallbackTreeVisitorLeave(RXCallbackTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes) {
+void *RXCallbackTreeVisitorLeave(RXCallbackTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef children) {
 	RXCallbackTreeVisitorLeaveFunction function = self->leaveCallbacks ? (CFDictionaryGetValue(self->leaveCallbacks, RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node))) ?: CFDictionaryGetValue(self->leaveCallbacks, kRXTreeVisitorGenericCallBackKey)) : NULL;
 	return function
-	?	function(self, node, childNodes)
+	?	function(self, node, children)
 	:	NULL;
 }
 

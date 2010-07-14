@@ -5,7 +5,6 @@
 #import "RXBlockTreeVisitor.h"
 #import "RXTreeNode.h"
 #import "RXTreeNodeTests.h"
-#import "RXLeafNode.h"
 #import "RXCoreFoundationIntegration.h"
 
 @implementation RXTreeNodeTests
@@ -29,8 +28,8 @@
 
 -(RXTreeVisitorRef)loggingVisitor {
 	return (RXTreeVisitorRef)RXBlockTreeVisitorCreate(NULL, RXDictionary(
-		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef childNodes) {
-			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
+		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef children) {
+			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), children ? [(NSArray *)children componentsJoinedByString: @", "] : @""];
 		}, kRXTreeVisitorGenericCallBackKey,
 	NULL));
 }

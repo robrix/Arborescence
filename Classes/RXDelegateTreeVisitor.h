@@ -16,7 +16,7 @@
 -(BOOL)visitor:(RXTreeVisitorRef)visitor visitNode:(RXTreeNodeRef)node;
 -(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node;
 -(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChild:(id)childNode;
--(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChildren:(NSArray *)childNodes;
+-(id)visitor:(RXTreeVisitorRef)visitor leaveNode:(RXTreeNodeRef)node withVisitedChildren:(NSArray *)children;
 @end
 
 typedef struct RXDelegateTreeVisitor * RXDelegateTreeVisitorRef;

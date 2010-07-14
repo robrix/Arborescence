@@ -13,13 +13,13 @@
 
 -(RXTreeVisitorRef)visitor {
 	return (RXTreeVisitorRef)RXBlockTreeVisitorCreate(NULL, RXDictionary(
-		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
+		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef children) {
 			return @"leaf";
 		}, @"leaf",
-		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
-			return [NSString stringWithFormat: @"branch(%@)", [(NSArray *)childNodes componentsJoinedByString: @", "]];
+		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef children) {
+			return [NSString stringWithFormat: @"branch(%@)", [(NSArray *)children componentsJoinedByString: @", "]];
 		}, @"branch",
-		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
+		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef children) {
 			return @"(whatever)";
 		}, kRXTreeVisitorGenericCallBackKey,
 	NULL));
@@ -31,8 +31,8 @@
 			return 0;
 		}, @"leaf",
 	NULL), RXDictionary(
-		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef childNodes) {
-			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
+		^void *(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef children) {
+			return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), children ? [(NSArray *)children componentsJoinedByString: @", "] : @""];
 		}, kRXTreeVisitorGenericCallBackKey,
 	NULL));
 }

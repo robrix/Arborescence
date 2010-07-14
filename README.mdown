@@ -18,7 +18,7 @@ This is done when the node itself is created:
 
 The above example demonstrates an Arborescence representation of the HTML snippet `<strong>Some text</strong>`[1]. Here `textNode` is a leaf node with a data pointer, while `strongNode` is a unary branch node. By the same token, you would create a div node similarly:
 
-	RXBranchNodeRef divNode = RXBranchNodeCreate(CFSTR("div"), childNodes); // fixme: specify arity (n-ary)
+	RXBranchNodeRef divNode = RXBranchNodeCreate(CFSTR("div"), children); // fixme: specify arity (n-ary)
 
 The arity of a given node can also be restricted to a range, allowing you to specify that a given node must have at least `m` but no more than `n` child nodes. The latter, maximum, value can be supplied as a constant symbolizing an unbounded maximum for nodes which must have at least `m` child nodes with no upper bound.
 
