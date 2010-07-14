@@ -8,11 +8,15 @@ typedef struct RXTreeNode {
 	RX_FIELDS_FROM(RXObject, RXObjectType);
 	
 	__strong RXTreeNodeClassRef nodeClass;
+	__strong RXTreeNodeRef parent;
 	__strong RXObjectRef data;
 	__strong CFArrayRef children;
 } RXTreeNode;
 
 struct RXObjectType RXTreeNodeType;
+
+
+void RXTreeNodeSetParent(RXTreeNodeRef self, RXTreeNodeRef parent);
 
 
 RXTreeNodeRef RXTreeNodeCreateLeaf(RXTreeNodeClassRef nodeClass, RXObjectRef data) {
@@ -30,6 +34,11 @@ RXTreeNodeRef RXTreeNodeCreate(RXTreeNodeClassRef nodeClass, RXObjectRef data, C
 	// fixme: assert the existence of either data or children
 	self->data = RXRetain(data);
 	self->children = children ? CFArrayCreateCopy(NULL, children) : NULL;
+	// fixme: enforce the arity of the children array
+	CFIndex count = children ? CFArrayGetCount(children) : 0;
+	for(CFIndex i = 0; i < count; i++) {
+		RXTreeNodeSetParent((RXTreeNodeRef)CFArrayGetValueAtIndex(children, i), self);
+	}
 	return self;
 }
 
@@ -70,6 +79,15 @@ void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor) {
 
 RXTreeNodeClassRef RXTreeNodeGetNodeClass(RXTreeNodeRef self) {
 	return self->nodeClass;
+}
+
+
+void RXTreeNodeSetParent(RXTreeNodeRef self, RXTreeNodeRef parent) {
+	self->parent = parent;
+}
+
+__strong void *RXTreeNodeGetParent(RXTreeNodeRef self) {
+	return self->parent;
 }
 
 

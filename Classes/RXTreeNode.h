@@ -22,6 +22,8 @@ void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor);
 
 RXTreeNodeClassRef RXTreeNodeGetNodeClass(RXTreeNodeRef self);
 
+__strong void *RXTreeNodeGetParent(RXTreeNodeRef self);
+
 __strong void *RXTreeNodeGetData(RXTreeNodeRef self);
 __strong CFArrayRef RXTreeNodeGetChildren(RXTreeNodeRef self);
 
