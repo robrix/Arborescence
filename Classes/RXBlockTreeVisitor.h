@@ -10,7 +10,7 @@
 typedef struct RXBlockTreeVisitor * RXBlockTreeVisitorRef;
 
 typedef bool (^RXBlockTreeVisitorVisitBlock)(RXBlockTreeVisitorRef self, RXTreeNodeRef node);
-typedef void *(^RXBlockTreeVisitorLeaveBlock)(RXBlockTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes);
+typedef void *(^RXBlockTreeVisitorLeaveBlock)(RXBlockTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef children);
 
 RXBlockTreeVisitorRef RXBlockTreeVisitorCreate(CFDictionaryRef visitBlocks, CFDictionaryRef leaveBlocks);
 

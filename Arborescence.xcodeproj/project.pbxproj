@@ -17,13 +17,7 @@
 		D405853A11E91A5C0072A54E /* RXObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D405853011E91A5C0072A54E /* RXObject.h */; };
 		D405853D11E91A5C0072A54E /* RXObjectType.h in Headers */ = {isa = PBXBuildFile; fileRef = D405853311E91A5C0072A54E /* RXObjectType.h */; };
 		D405853E11E91A5C0072A54E /* RXShadowObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D405853411E91A5C0072A54E /* RXShadowObject.h */; };
-		D405855311E925B30072A54E /* RXLeafNode.c in Sources */ = {isa = PBXBuildFile; fileRef = D405855111E925B30072A54E /* RXLeafNode.c */; };
-		D405855411E925B30072A54E /* RXLeafNode.h in Headers */ = {isa = PBXBuildFile; fileRef = D405855211E925B30072A54E /* RXLeafNode.h */; };
 		D405855711E926690072A54E /* libArborescence.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libArborescence.a */; };
-		D405857111E98F9A0072A54E /* RXLeafNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D405856F11E98F9A0072A54E /* RXLeafNodeTests.m */; };
-		D405858711E993220072A54E /* RXBranchNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D405858611E993220072A54E /* RXBranchNodeTests.m */; };
-		D405859511E997AF0072A54E /* RXBranchNode.c in Sources */ = {isa = PBXBuildFile; fileRef = D405859311E997AF0072A54E /* RXBranchNode.c */; };
-		D405859611E997AF0072A54E /* RXBranchNode.h in Headers */ = {isa = PBXBuildFile; fileRef = D405859411E997AF0072A54E /* RXBranchNode.h */; };
 		D40585A811E9A0010072A54E /* RXTreeVisitor.c in Sources */ = {isa = PBXBuildFile; fileRef = D40585A611E9A0010072A54E /* RXTreeVisitor.c */; };
 		D40585A911E9A0010072A54E /* RXTreeVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D40585A711E9A0010072A54E /* RXTreeVisitor.h */; };
 		D40585BF11E9A3530072A54E /* RXTreeVisitorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D40585BE11E9A3530072A54E /* RXTreeVisitorTests.m */; };
@@ -38,6 +32,8 @@
 		D40586C211EB12A50072A54E /* RXDelegateTreeVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = D40586C011EB12A50072A54E /* RXDelegateTreeVisitor.h */; };
 		D405871811EBA7060072A54E /* RXTreeNodeClass.c in Sources */ = {isa = PBXBuildFile; fileRef = D405871611EBA7060072A54E /* RXTreeNodeClass.c */; };
 		D405871911EBA7060072A54E /* RXTreeNodeClass.h in Headers */ = {isa = PBXBuildFile; fileRef = D405871711EBA7060072A54E /* RXTreeNodeClass.h */; };
+		D40587A811ED7B360072A54E /* RXBranchNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D40587A111ED7B1B0072A54E /* RXBranchNodeTests.m */; };
+		D40587A911ED7B360072A54E /* RXLeafNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D40587A211ED7B1B0072A54E /* RXLeafNodeTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,13 +84,7 @@
 		D405853011E91A5C0072A54E /* RXObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXObject.h; sourceTree = "<group>"; };
 		D405853311E91A5C0072A54E /* RXObjectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXObjectType.h; sourceTree = "<group>"; };
 		D405853411E91A5C0072A54E /* RXShadowObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXShadowObject.h; sourceTree = "<group>"; };
-		D405855111E925B30072A54E /* RXLeafNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RXLeafNode.c; sourceTree = "<group>"; };
-		D405855211E925B30072A54E /* RXLeafNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXLeafNode.h; sourceTree = "<group>"; };
-		D405856F11E98F9A0072A54E /* RXLeafNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXLeafNodeTests.m; sourceTree = "<group>"; };
 		D405857011E98F9A0072A54E /* RXTreeNodeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXTreeNodeTests.h; sourceTree = "<group>"; };
-		D405858611E993220072A54E /* RXBranchNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBranchNodeTests.m; sourceTree = "<group>"; };
-		D405859311E997AF0072A54E /* RXBranchNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RXBranchNode.c; sourceTree = "<group>"; };
-		D405859411E997AF0072A54E /* RXBranchNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBranchNode.h; sourceTree = "<group>"; };
 		D40585A611E9A0010072A54E /* RXTreeVisitor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RXTreeVisitor.c; sourceTree = "<group>"; };
 		D40585A711E9A0010072A54E /* RXTreeVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXTreeVisitor.h; sourceTree = "<group>"; };
 		D40585BD11E9A3530072A54E /* RXTreeVisitorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXTreeVisitorTests.h; sourceTree = "<group>"; };
@@ -110,6 +100,8 @@
 		D40586C011EB12A50072A54E /* RXDelegateTreeVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXDelegateTreeVisitor.h; sourceTree = "<group>"; };
 		D405871611EBA7060072A54E /* RXTreeNodeClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RXTreeNodeClass.c; sourceTree = "<group>"; };
 		D405871711EBA7060072A54E /* RXTreeNodeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXTreeNodeClass.h; sourceTree = "<group>"; };
+		D40587A111ED7B1B0072A54E /* RXBranchNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBranchNodeTests.m; sourceTree = "<group>"; };
+		D40587A211ED7B1B0072A54E /* RXLeafNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXLeafNodeTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,14 +160,10 @@
 			children = (
 				D405862111E9BDB40072A54E /* RXBlockTreeVisitor.c */,
 				D405862211E9BDB40072A54E /* RXBlockTreeVisitor.h */,
-				D405859311E997AF0072A54E /* RXBranchNode.c */,
-				D405859411E997AF0072A54E /* RXBranchNode.h */,
 				D405867E11EB0BD00072A54E /* RXCallbackTreeVisitor.c */,
 				D405867F11EB0BD00072A54E /* RXCallbackTreeVisitor.h */,
 				D40586BF11EB12A50072A54E /* RXDelegateTreeVisitor.m */,
 				D40586C011EB12A50072A54E /* RXDelegateTreeVisitor.h */,
-				D405855111E925B30072A54E /* RXLeafNode.c */,
-				D405855211E925B30072A54E /* RXLeafNode.h */,
 				D40582ED11E47C1C0072A54E /* RXTreeNode.c */,
 				D40582EE11E47C1C0072A54E /* RXTreeNode.h */,
 				D405871611EBA7060072A54E /* RXTreeNodeClass.c */,
@@ -242,10 +230,10 @@
 			isa = PBXGroup;
 			children = (
 				D40585EB11E9B36A0072A54E /* RXBlockTreeVisitorTests.m */,
-				D405858611E993220072A54E /* RXBranchNodeTests.m */,
+				D40587A111ED7B1B0072A54E /* RXBranchNodeTests.m */,
 				D40585ED11E9B3710072A54E /* RXCallbackTreeVisitorTests.m */,
 				D40585EE11E9B3710072A54E /* RXDelegateTreeVisitorTests.m */,
-				D405856F11E98F9A0072A54E /* RXLeafNodeTests.m */,
+				D40587A211ED7B1B0072A54E /* RXLeafNodeTests.m */,
 				D405857011E98F9A0072A54E /* RXTreeNodeTests.h */,
 				D405852111E919860072A54E /* RXTreeNodeTests.m */,
 				D40585BD11E9A3530072A54E /* RXTreeVisitorTests.h */,
@@ -279,8 +267,6 @@
 				D405853A11E91A5C0072A54E /* RXObject.h in Headers */,
 				D405853D11E91A5C0072A54E /* RXObjectType.h in Headers */,
 				D405853E11E91A5C0072A54E /* RXShadowObject.h in Headers */,
-				D405855411E925B30072A54E /* RXLeafNode.h in Headers */,
-				D405859611E997AF0072A54E /* RXBranchNode.h in Headers */,
 				D40585A911E9A0010072A54E /* RXTreeVisitor.h in Headers */,
 				D405862411E9BDB40072A54E /* RXBlockTreeVisitor.h in Headers */,
 				D405868111EB0BD00072A54E /* RXCallbackTreeVisitor.h in Headers */,
@@ -403,8 +389,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D40582EF11E47C1C0072A54E /* RXTreeNode.c in Sources */,
-				D405855311E925B30072A54E /* RXLeafNode.c in Sources */,
-				D405859511E997AF0072A54E /* RXBranchNode.c in Sources */,
 				D40585A811E9A0010072A54E /* RXTreeVisitor.c in Sources */,
 				D405862311E9BDB40072A54E /* RXBlockTreeVisitor.c in Sources */,
 				D405868011EB0BD00072A54E /* RXCallbackTreeVisitor.c in Sources */,
@@ -419,12 +403,12 @@
 			files = (
 				D40584FA11E9189A0072A54E /* RXAssertions.m in Sources */,
 				D405852211E919860072A54E /* RXTreeNodeTests.m in Sources */,
-				D405857111E98F9A0072A54E /* RXLeafNodeTests.m in Sources */,
-				D405858711E993220072A54E /* RXBranchNodeTests.m in Sources */,
 				D40585BF11E9A3530072A54E /* RXTreeVisitorTests.m in Sources */,
 				D40585EC11E9B36A0072A54E /* RXBlockTreeVisitorTests.m in Sources */,
 				D40585EF11E9B3710072A54E /* RXCallbackTreeVisitorTests.m in Sources */,
 				D40585F011E9B3710072A54E /* RXDelegateTreeVisitorTests.m in Sources */,
+				D40587A811ED7B360072A54E /* RXBranchNodeTests.m in Sources */,
+				D40587A911ED7B360072A54E /* RXLeafNodeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

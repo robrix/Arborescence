@@ -34,10 +34,10 @@ bool RXBlockTreeVisitorVisit(RXBlockTreeVisitorRef self, RXTreeNodeRef node) {
 	:	1;
 }
 
-void *RXBlockTreeVisitorLeave(RXBlockTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes) {
+void *RXBlockTreeVisitorLeave(RXBlockTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef children) {
 	RXBlockTreeVisitorLeaveBlock block = self->leaveBlocks ? (CFDictionaryGetValue(self->leaveBlocks, RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node))) ?: CFDictionaryGetValue(self->leaveBlocks, kRXTreeVisitorGenericCallBackKey)) : NULL;
 	return block
-	?	block(self, node, childNodes)
+	?	block(self, node, children)
 	:	NULL;
 }
 

@@ -6,15 +6,15 @@
 #import "RXCallbackTreeVisitor.h"
 #import "RXCoreFoundationIntegration.h"
 
-void *RXCallbackTreeVisitorTestsLeaveLeaf(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
+void *RXCallbackTreeVisitorTestsLeaveLeaf(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef children) {
 	return @"leaf";
 }
 
-void *RXCallbackTreeVisitorTestsLeaveBranch(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
-	return [NSString stringWithFormat: @"branch(%@)", [(NSArray *)childNodes componentsJoinedByString: @", "]];
+void *RXCallbackTreeVisitorTestsLeaveBranch(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef children) {
+	return [NSString stringWithFormat: @"branch(%@)", [(NSArray *)children componentsJoinedByString: @", "]];
 }
 
-void *RXCallbackTreeVisitorTestsLeaveGeneric(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef childNodes) {
+void *RXCallbackTreeVisitorTestsLeaveGeneric(RXTreeVisitorRef visitor, RXTreeNodeRef node, CFArrayRef children) {
 	return @"(whatever)";
 }
 
@@ -23,8 +23,8 @@ bool RXCallbackTreeVisitorTestsFilterLeaf(RXTreeVisitorRef visitor, RXTreeNodeRe
 	return 0;
 }
 
-void *RXCallbackTreeVisitorTestsLeaveUnfilteredGeneric(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef childNodes) {
-	return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), childNodes ? [(NSArray *)childNodes componentsJoinedByString: @", "] : @""];
+void *RXCallbackTreeVisitorTestsLeaveUnfilteredGeneric(RXTreeVisitorRef visitor, RXTreeNodeRef visitedNode, CFArrayRef children) {
+	return [NSString stringWithFormat: @"%@(%@)", RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(visitedNode)), children ? [(NSArray *)children componentsJoinedByString: @", "] : @""];
 }
 
 

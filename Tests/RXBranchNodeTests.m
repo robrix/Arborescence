@@ -3,8 +3,6 @@
 // Copyright 2010 Monochrome Industries
 
 #import "RXTreeNodeTests.h"
-#import "RXBranchNode.h"
-#import "RXLeafNode.h"
 #import "RXCoreFoundationIntegration.h"
 
 @interface RXBranchNodeTests : RXTreeNodeTests
@@ -12,12 +10,12 @@
 
 @implementation RXBranchNodeTests
 
--(CFArrayRef)childNodes {
-	return RXArray(RXLeafNodeCreate(RXTreeNodeClassCreateLeaf(CFSTR("leaf1")), self, kRXLeafNodeObjectCallBacks), RXLeafNodeCreate(RXTreeNodeClassCreateLeaf(CFSTR("leaf2")), self, kRXLeafNodeObjectCallBacks), NULL);
+-(CFArrayRef)children {
+	return RXArray(RXTreeNodeCreateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("leaf1")), self), RXTreeNodeCreateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("leaf2")), self), NULL);
 }
 
 -(RXTreeNodeRef)createNode {
-	return (RXTreeNodeRef)RXBranchNodeCreate(nodeClass, self.childNodes);
+	return (RXTreeNodeRef)RXTreeNodeCreateBranch(nodeClass, self.children);
 }
 
 -(RXTreeNodeClassRef)nodeClass {
@@ -34,7 +32,7 @@
 
 
 -(void)testHasChildNodes {
-	RXAssertEquals(RXBranchNodeGetChildNodes((RXBranchNodeRef)node), self.childNodes);
+	RXAssertEquals(RXTreeNodeGetChildren(node), self.children);
 }
 
 @end

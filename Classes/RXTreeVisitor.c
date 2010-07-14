@@ -19,8 +19,8 @@ bool RXTreeVisitorVisitNode(RXTreeVisitorRef self, RXTreeNodeRef node) {
 	:	1;
 }
 
-void *RXTreeVisitorLeaveNode(RXTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef childNodes) {
+void *RXTreeVisitorLeaveNode(RXTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef children) {
 	return self->type->leave
-	?	self->type->leave(self, node, childNodes)
+	?	self->type->leave(self, node, children)
 	:	NULL;
 }

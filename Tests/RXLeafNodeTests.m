@@ -3,7 +3,6 @@
 // Copyright 2010 Monochrome Industries
 
 #import "RXTreeNodeTests.h"
-#import "RXLeafNode.h"
 
 @interface RXLeafNodeTests : RXTreeNodeTests
 @end
@@ -11,7 +10,7 @@
 @implementation RXLeafNodeTests
 
 -(RXTreeNodeRef)createNode {
-	return (RXTreeNodeRef)RXLeafNodeCreate(nodeClass, self, kRXLeafNodeObjectCallBacks);
+	return RXTreeNodeCreateLeaf(nodeClass, self);
 }
 
 -(RXTreeNodeClassRef)nodeClass {
@@ -28,7 +27,7 @@
 
 
 -(void)testHasDataPointer {
-	RXAssertEquals(RXLeafNodeGetData((RXLeafNodeRef)node), self);
+	RXAssertEquals(RXTreeNodeGetData(node), self);
 }
 
 @end
