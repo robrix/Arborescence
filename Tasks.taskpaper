@@ -1,2 +1,5 @@
 Nodes:
-	- have a reference to their parent.
+	- have a reference to their parent. @done(2010-07-14)
+	- enforce fixed arity.
+	- construct via a factory function taking the class.
+	- allow mutable nodes?

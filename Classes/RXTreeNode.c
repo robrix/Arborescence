@@ -10,6 +10,7 @@ typedef struct RXTreeNode {
 	__strong RXTreeNodeClassRef nodeClass;
 	__strong RXObjectRef data;
 	__strong CFArrayRef children;
+	__strong RXTreeNodeRef parent;
 } RXTreeNode;
 
 struct RXObjectType RXTreeNodeType;
@@ -70,6 +71,11 @@ void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor) {
 
 RXTreeNodeClassRef RXTreeNodeGetNodeClass(RXTreeNodeRef self) {
 	return self->nodeClass;
+}
+
+
+__strong void *RXTreeNodeGetParent(RXTreeNodeRef self) {
+	return self->parent;
 }
 
 
