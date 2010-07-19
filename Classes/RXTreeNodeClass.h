@@ -5,6 +5,10 @@
 #ifndef RX_TREE_NODE_CLASS
 #define RX_TREE_NODE_CLASS
 
+#ifndef RX_TREE_NODE
+#error Include RXTreeNode.h instead of RXTreeNodeClass.h
+#endif // RX_TREE_NODE
+
 #import <CoreFoundation/CoreFoundation.h>
 #import "RXObject.h"
 
@@ -13,15 +17,21 @@ typedef struct RXTreeNodeClass * RXTreeNodeClassRef;
 typedef RXIndex RXArity;
 #define RXUnboundedArity RXIndexMax
 
-RXTreeNodeClassRef RXTreeNodeClassCreateLeaf(CFStringRef name);
+#define RXObjectReferenceSize RXIndexMax
+
+RXTreeNodeClassRef RXTreeNodeClassCreateLeaf(CFStringRef name, RXIndex dataSize);
 RXTreeNodeClassRef RXTreeNodeClassCreateBranch(CFStringRef name);
-RXTreeNodeClassRef RXTreeNodeClassCreateFixed(CFStringRef name, RXArity arity);
-RXTreeNodeClassRef RXTreeNodeClassCreate(CFStringRef name, RXArity minimumArity, RXArity maximumArity);
+RXTreeNodeClassRef RXTreeNodeClassCreate(CFStringRef name, RXIndex dataSize, RXArity minimumArity, RXArity maximumArity);
 
 __strong CFStringRef RXTreeNodeClassGetName(RXTreeNodeClassRef self);
 
 bool RXTreeNodeClassIsNullary(RXTreeNodeClassRef self);
 bool RXTreeNodeClassIsUnary(RXTreeNodeClassRef self);
-// RXTreeNodeRef RXTreeNodeClassInstantiate(RXTreeNodeClassRef self, void * data);
+
+bool RXTreeNodeClassDataIsObject(RXTreeNodeClassRef self);
+
+RXTreeNodeRef RXTreeNodeClassInstantiate(RXTreeNodeClassRef self, void * data, CFArrayRef children);
+RXTreeNodeRef RXTreeNodeClassInstantiateBranch(RXTreeNodeClassRef self, CFArrayRef children);
+RXTreeNodeRef RXTreeNodeClassInstantiateLeaf(RXTreeNodeClassRef self, void * data);
 
 #endif // RX_TREE_NODE_CLASS

@@ -2,51 +2,15 @@
 // Created by Rob Rix on 2010-07-07
 // Copyright 2010 Monochrome Industries
 
-#include "RXTreeNode.h"
-
-typedef struct RXTreeNode {
-	RX_FIELDS_FROM(RXObject, RXObjectType);
-	
-	__strong RXTreeNodeClassRef nodeClass;
-	__strong RXTreeNodeRef parent;
-	__strong RXObjectRef data;
-	__strong CFArrayRef children;
-} RXTreeNode;
-
-struct RXObjectType RXTreeNodeType;
-
-
-void RXTreeNodeSetParent(RXTreeNodeRef self, RXTreeNodeRef parent);
-
-
-RXTreeNodeRef RXTreeNodeCreateLeaf(RXTreeNodeClassRef nodeClass, RXObjectRef data) {
-	return RXTreeNodeCreate(nodeClass, data, NULL);
-}
-
-RXTreeNodeRef RXTreeNodeCreateBranch(RXTreeNodeClassRef nodeClass, CFArrayRef children) {
-	return RXTreeNodeCreate(nodeClass, NULL, children);
-}
-
-RXTreeNodeRef RXTreeNodeCreate(RXTreeNodeClassRef nodeClass, RXObjectRef data, CFArrayRef children) {
-	RXTreeNodeRef self = RXCreate(sizeof(struct RXTreeNode), &RXTreeNodeType);
-	// fixme: assert the existence of nodeClass
-	self->nodeClass = RXRetain(nodeClass);
-	// fixme: assert the existence of either data or children
-	self->data = RXRetain(data);
-	self->children = children ? CFArrayCreateCopy(NULL, children) : NULL;
-	// fixme: enforce the arity of the children array
-	CFIndex count = children ? CFArrayGetCount(children) : 0;
-	for(CFIndex i = 0; i < count; i++) {
-		RXTreeNodeSetParent((RXTreeNodeRef)CFArrayGetValueAtIndex(children, i), self);
-	}
-	return self;
-}
-
+#include "RXTreeNode+Protected.h"
+#include "RXTreeNodeClass+Protected.h"
 
 void RXTreeNodeDeallocate(RXTreeNodeRef self) {
+	if(RXTreeNodeGetChildren(self)) CFRelease(RXTreeNodeGetChildren(self));
+	if(RXTreeNodeClassDataIsObject(self->nodeClass)) {
+		RXRelease(self->data);
+	}
 	RXRelease(self->nodeClass);
-	RXRelease(self->data);
-	if(self->children) CFRelease(self->children);
 }
 
 
@@ -92,11 +56,17 @@ __strong void *RXTreeNodeGetParent(RXTreeNodeRef self) {
 
 
 __strong void *RXTreeNodeGetData(RXTreeNodeRef self) {
-	return self->data;
+	void *data = NULL;
+	if(RXTreeNodeClassDataIsObject(self->nodeClass)) {
+		data = self->data;
+	} else {
+		data = ((uint8_t *)self) + RXTreeNodeClassInstanceDataOffset(self->nodeClass);
+	}
+	return data;
 }
 
 __strong CFArrayRef RXTreeNodeGetChildren(RXTreeNodeRef self) {
-	return self->children;
+	return *(CFArrayRef *)(((uint8_t *)self) + RXTreeNodeClassInstanceChildrenOffset(self->nodeClass));
 }
 
 

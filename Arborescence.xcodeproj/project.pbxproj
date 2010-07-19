@@ -34,6 +34,9 @@
 		D405871911EBA7060072A54E /* RXTreeNodeClass.h in Headers */ = {isa = PBXBuildFile; fileRef = D405871711EBA7060072A54E /* RXTreeNodeClass.h */; };
 		D40587A811ED7B360072A54E /* RXBranchNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D40587A111ED7B1B0072A54E /* RXBranchNodeTests.m */; };
 		D40587A911ED7B360072A54E /* RXLeafNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D40587A211ED7B1B0072A54E /* RXLeafNodeTests.m */; };
+		D47B8D4311F4587100379C5E /* RXTreeNode+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = D47B8D4211F4587100379C5E /* RXTreeNode+Protected.h */; };
+		D47B8D4511F4588600379C5E /* RXStructLeafNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B8D4411F4588600379C5E /* RXStructLeafNodeTests.m */; };
+		D47B8D5F11F45DBB00379C5E /* RXTreeNodeClass+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = D47B8D5E11F45DBB00379C5E /* RXTreeNodeClass+Protected.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,9 @@
 		D405871711EBA7060072A54E /* RXTreeNodeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXTreeNodeClass.h; sourceTree = "<group>"; };
 		D40587A111ED7B1B0072A54E /* RXBranchNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBranchNodeTests.m; sourceTree = "<group>"; };
 		D40587A211ED7B1B0072A54E /* RXLeafNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXLeafNodeTests.m; sourceTree = "<group>"; };
+		D47B8D4211F4587100379C5E /* RXTreeNode+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RXTreeNode+Protected.h"; sourceTree = "<group>"; };
+		D47B8D4411F4588600379C5E /* RXStructLeafNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXStructLeafNodeTests.m; sourceTree = "<group>"; };
+		D47B8D5E11F45DBB00379C5E /* RXTreeNodeClass+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RXTreeNodeClass+Protected.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,8 +172,10 @@
 				D40586C011EB12A50072A54E /* RXDelegateTreeVisitor.h */,
 				D40582ED11E47C1C0072A54E /* RXTreeNode.c */,
 				D40582EE11E47C1C0072A54E /* RXTreeNode.h */,
+				D47B8D4211F4587100379C5E /* RXTreeNode+Protected.h */,
 				D405871611EBA7060072A54E /* RXTreeNodeClass.c */,
 				D405871711EBA7060072A54E /* RXTreeNodeClass.h */,
+				D47B8D5E11F45DBB00379C5E /* RXTreeNodeClass+Protected.h */,
 				D40585A611E9A0010072A54E /* RXTreeVisitor.c */,
 				D40585A711E9A0010072A54E /* RXTreeVisitor.h */,
 			);
@@ -234,6 +242,7 @@
 				D40585ED11E9B3710072A54E /* RXCallbackTreeVisitorTests.m */,
 				D40585EE11E9B3710072A54E /* RXDelegateTreeVisitorTests.m */,
 				D40587A211ED7B1B0072A54E /* RXLeafNodeTests.m */,
+				D47B8D4411F4588600379C5E /* RXStructLeafNodeTests.m */,
 				D405857011E98F9A0072A54E /* RXTreeNodeTests.h */,
 				D405852111E919860072A54E /* RXTreeNodeTests.m */,
 				D40585BD11E9A3530072A54E /* RXTreeVisitorTests.h */,
@@ -272,6 +281,8 @@
 				D405868111EB0BD00072A54E /* RXCallbackTreeVisitor.h in Headers */,
 				D40586C211EB12A50072A54E /* RXDelegateTreeVisitor.h in Headers */,
 				D405871911EBA7060072A54E /* RXTreeNodeClass.h in Headers */,
+				D47B8D4311F4587100379C5E /* RXTreeNode+Protected.h in Headers */,
+				D47B8D5F11F45DBB00379C5E /* RXTreeNodeClass+Protected.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +420,7 @@
 				D40585F011E9B3710072A54E /* RXDelegateTreeVisitorTests.m in Sources */,
 				D40587A811ED7B360072A54E /* RXBranchNodeTests.m in Sources */,
 				D40587A911ED7B360072A54E /* RXLeafNodeTests.m in Sources */,
+				D47B8D4511F4588600379C5E /* RXStructLeafNodeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

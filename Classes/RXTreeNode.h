@@ -12,10 +12,6 @@ typedef struct RXTreeNode * RXTreeNodeRef;
 #include "RXTreeNodeClass.h"
 #include "RXTreeVisitor.h"
 
-RXTreeNodeRef RXTreeNodeCreateLeaf(RXTreeNodeClassRef nodeClass, RXObjectRef data);
-RXTreeNodeRef RXTreeNodeCreateBranch(RXTreeNodeClassRef nodeClass, CFArrayRef children);
-RXTreeNodeRef RXTreeNodeCreate(RXTreeNodeClassRef nodeClass, RXObjectRef data, CFArrayRef children);
-
 typedef void *(*RXTreeNodeAcceptVisitorMethod)(RXTreeNodeRef self, RXTreeVisitorRef visitor);
 
 void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor);

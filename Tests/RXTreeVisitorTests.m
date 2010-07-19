@@ -19,17 +19,17 @@
 
 -(RXTreeNodeRef)tree {
 	RXTreeNodeClassRef
-		leafClass = RXTreeNodeClassCreateLeaf(CFSTR("leaf")),
+		leafClass = RXTreeNodeClassCreateLeaf(CFSTR("leaf"), RXObjectReferenceSize),
 		branchClass = RXTreeNodeClassCreateBranch(CFSTR("branch")),
 		fooClass = RXTreeNodeClassCreateBranch(CFSTR("foo")),
-		barClass = RXTreeNodeClassCreateLeaf(CFSTR("bar"));
-	return (RXTreeNodeRef)RXTreeNodeCreateBranch(branchClass, RXArray(
-		RXTreeNodeCreateLeaf(leafClass, NULL),
-		RXTreeNodeCreateBranch(branchClass, RXArray(
-			RXTreeNodeCreateLeaf(leafClass, NULL),
-			RXTreeNodeCreateBranch(fooClass, (CFArrayRef)[NSArray array]),
+		barClass = RXTreeNodeClassCreateLeaf(CFSTR("bar"), RXObjectReferenceSize);
+	return (RXTreeNodeRef)RXTreeNodeClassInstantiateBranch(branchClass, RXArray(
+		RXTreeNodeClassInstantiateLeaf(leafClass, NULL),
+		RXTreeNodeClassInstantiateBranch(branchClass, RXArray(
+			RXTreeNodeClassInstantiateLeaf(leafClass, NULL),
+			RXTreeNodeClassInstantiateBranch(fooClass, (CFArrayRef)[NSArray array]),
 		NULL)),
-		RXTreeNodeCreateLeaf(barClass, NULL),
+		RXTreeNodeClassInstantiateLeaf(barClass, NULL),
 	NULL));
 }
 

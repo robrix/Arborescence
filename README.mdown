@@ -17,7 +17,7 @@ Creating the classes is done with the `RXTreeNodeCreate` function or its variant
 
 When creating a node, you pass its class as the first parameter:
 
-	RXTreeNodeRef textNode = RXTreeNodeCreateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("text")), CFSTR("Some text"));
+	RXTreeNodeRef textNode = RXTreeNodeClassInstantiateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("text")), CFSTR("Some text"));
 	RXTreeNodeRef strongNode = RXTreeNodeCreateBranch(RXTreeNodeClassCreateFixed(CFSTR("strong"), 1), (CFArrayRef)[NSArray arrayWithObject: (id)textNode]);
 
 The above example demonstrates an Arborescence representation of the HTML snippet `<strong>Some text</strong>`[1]. Here `textNode` is a leaf node with a data pointer, while `strongNode` is a unary branch node (a “fixed” node, in that it is expected to have a fixed number of children). By the same token, you would create a div node similarly:

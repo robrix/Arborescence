@@ -10,11 +10,11 @@
 @implementation RXLeafNodeTests
 
 -(RXTreeNodeRef)createNode {
-	return RXTreeNodeCreateLeaf(nodeClass, self);
+	return RXTreeNodeClassInstantiateLeaf(nodeClass, self);
 }
 
 -(RXTreeNodeClassRef)nodeClass {
-	return RXTreeNodeClassCreateLeaf(self.expectedNodeName);
+	return RXTreeNodeClassCreateLeaf(self.expectedNodeName, RXObjectReferenceSize);
 }
 
 -(CFStringRef)expectedNodeName {
@@ -26,7 +26,7 @@
 }
 
 
--(void)testHasDataPointer {
+-(void)testHasData {
 	RXAssertEquals(RXTreeNodeGetData(node), self);
 }
 

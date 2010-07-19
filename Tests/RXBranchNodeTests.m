@@ -11,11 +11,11 @@
 @implementation RXBranchNodeTests
 
 -(CFArrayRef)children {
-	return RXArray(RXTreeNodeCreateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("leaf1")), self), RXTreeNodeCreateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("leaf2")), self), NULL);
+	return RXArray(RXTreeNodeClassInstantiateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("leaf1"), RXObjectReferenceSize), self), RXTreeNodeClassInstantiateLeaf(RXTreeNodeClassCreateLeaf(CFSTR("leaf2"), sizeof(void *)), self), NULL);
 }
 
 -(RXTreeNodeRef)createNode {
-	return (RXTreeNodeRef)RXTreeNodeCreateBranch(nodeClass, self.children);
+	return (RXTreeNodeRef)RXTreeNodeClassInstantiateBranch(nodeClass, self.children);
 }
 
 -(RXTreeNodeClassRef)nodeClass {
@@ -31,7 +31,7 @@
 }
 
 
--(void)testHasChildNodes {
+-(void)testHasChildren {
 	RXAssertEquals(RXTreeNodeGetChildren(node), self.children);
 }
 

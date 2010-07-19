@@ -1,7 +1,7 @@
 Nodes:
 	- have a reference to their parent. @done(2010-07-14)
-	- enforce fixed arity.
-	- construct nodes via a factory function taking the class.
+	- enforce arity.
+	- construct nodes via a factory function taking the class. @done(2010-07-19)
 	- allow mutable nodes?
 Visitors:
 	- remove visitor: from the delegate visitor methods.
