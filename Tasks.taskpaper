@@ -3,5 +3,6 @@ Nodes:
 	- enforce arity.
 	- construct nodes via a factory function taking the class. @done(2010-07-19)
 	- allow mutable nodes?
+	- handle data alignment/padding.
 Visitors:
 	- remove visitor: from the delegate visitor methods.

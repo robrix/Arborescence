@@ -69,6 +69,10 @@ __strong CFArrayRef RXTreeNodeGetChildren(RXTreeNodeRef self) {
 	return *(CFArrayRef *)(((uint8_t *)self) + RXTreeNodeClassInstanceChildrenOffset(self->nodeClass));
 }
 
+__strong RXTreeNodeRef RXTreeNodeGetChild(RXTreeNodeRef self, RXIndex i) {
+	return (RXTreeNodeRef)CFArrayGetValueAtIndex(RXTreeNodeGetChildren(self), i);
+}
+
 
 struct RXObjectType RXTreeNodeType = {
 	.deallocate = (RXDeallocateMethod)RXTreeNodeDeallocate,
