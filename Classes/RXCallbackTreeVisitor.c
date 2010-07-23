@@ -15,8 +15,7 @@ struct RXTreeVisitorType RXCallbackTreeVisitorType;
 
 
 CFDictionaryRef RXCallbackDictionaryCreate(void *callback, ...) {
-	CFDictionaryValueCallBacks valueFunctions = {0};
-	CFMutableDictionaryRef callbacks = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &valueFunctions);
+	CFMutableDictionaryRef callbacks = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, NULL);
 	va_list args;
 	va_start(args, callback);
 	do {
@@ -52,7 +51,9 @@ bool RXCallbackTreeVisitorVisit(RXCallbackTreeVisitorRef self, RXTreeNodeRef nod
 }
 
 void *RXCallbackTreeVisitorLeave(RXCallbackTreeVisitorRef self, RXTreeNodeRef node, CFArrayRef children) {
-	RXCallbackTreeVisitorLeaveFunction function = self->leaveCallbacks ? (CFDictionaryGetValue(self->leaveCallbacks, RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node))) ?: CFDictionaryGetValue(self->leaveCallbacks, kRXTreeVisitorGenericCallBackKey)) : NULL;
+	RXCallbackTreeVisitorLeaveFunction function = self->leaveCallbacks
+	?	CFDictionaryGetValue(self->leaveCallbacks, RXTreeNodeClassGetName(RXTreeNodeGetNodeClass(node))) ?: CFDictionaryGetValue(self->leaveCallbacks, kRXTreeVisitorGenericCallBackKey)
+	:	NULL;
 	return function
 	?	function(self, node, children)
 	:	NULL;

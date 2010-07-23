@@ -55,6 +55,14 @@ __strong void *RXTreeNodeGetParent(RXTreeNodeRef self) {
 }
 
 
+__strong void RXTreeNodeSetData(RXTreeNodeRef self, __strong void * data) {
+	if(RXTreeNodeClassDataIsObject(self->nodeClass)) {
+		self->data = data;
+	} else {
+		memcpy(((uint8_t *)self) + RXTreeNodeClassInstanceDataOffset(self->nodeClass), data, RXTreeNodeClassInstanceDataSize(self->nodeClass));
+	}
+}
+
 __strong void *RXTreeNodeGetData(RXTreeNodeRef self) {
 	void *data = NULL;
 	if(RXTreeNodeClassDataIsObject(self->nodeClass)) {
@@ -75,6 +83,8 @@ __strong RXTreeNodeRef RXTreeNodeGetChild(RXTreeNodeRef self, RXIndex i) {
 
 
 struct RXObjectType RXTreeNodeType = {
+	.name = "RXTreeNode",
+	
 	.deallocate = (RXDeallocateMethod)RXTreeNodeDeallocate,
 	.isEqual = (RXIsEqualMethod)RXTreeNodeIsEqual,
 };

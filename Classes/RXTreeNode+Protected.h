@@ -19,6 +19,7 @@ typedef struct RXTreeNode {
 	
 	__strong RXTreeNodeClassRef nodeClass;
 	__strong RXTreeNodeRef parent;
+	
 	__strong RXObjectRef data;
 	__strong CFArrayRef children;
 } RXTreeNode;

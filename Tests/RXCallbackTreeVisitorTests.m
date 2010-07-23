@@ -42,21 +42,25 @@ void *RXWithCFObject(CFTypeRef object, RXWithCFObjectBlock block) {
 @implementation RXCallbackTreeVisitorTests
 
 -(RXTreeVisitorRef)visitor {
-	return RXWithCFObject(RXCallbackDictionaryCreate(
+	RXTreeVisitorRef visitor = RXWithCFObject(RXCallbackDictionaryCreate(
 		RXCallbackTreeVisitorTestsLeaveLeaf, @"leaf",
 		RXCallbackTreeVisitorTestsLeaveBranch, @"branch",
 		RXCallbackTreeVisitorTestsLeaveGeneric, kRXTreeVisitorGenericCallBackKey,
 	NULL), (RXWithCFObjectBlock)^(CFDictionaryRef callbacks) {
 		return RXCallbackTreeVisitorCreate(NULL, callbacks);
 	});
+	RXAssertNotNil(visitor);
+	return visitor;
 }
 
 -(RXTreeVisitorRef)filteringVisitor {
-	return RXWithCFObject(RXCallbackDictionaryCreate(RXCallbackTreeVisitorTestsFilterLeaf, @"leaf", NULL), (RXWithCFObjectBlock)^(CFDictionaryRef visitCallbacks) {
+	RXTreeVisitorRef visitor = RXWithCFObject(RXCallbackDictionaryCreate(RXCallbackTreeVisitorTestsFilterLeaf, @"leaf", NULL), (RXWithCFObjectBlock)^(CFDictionaryRef visitCallbacks) {
 		return RXWithCFObject(RXCallbackDictionaryCreate(RXCallbackTreeVisitorTestsLeaveUnfilteredGeneric, kRXTreeVisitorGenericCallBackKey, NULL), (RXWithCFObjectBlock)^(CFDictionaryRef leaveCallbacks) {
 			return RXCallbackTreeVisitorCreate(visitCallbacks, leaveCallbacks);
 		});
 	});
+	RXAssertNotNil(visitor);
+	return visitor;
 }
 
 @end

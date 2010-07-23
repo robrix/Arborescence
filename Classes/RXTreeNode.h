@@ -20,6 +20,7 @@ RXTreeNodeClassRef RXTreeNodeGetNodeClass(RXTreeNodeRef self);
 
 __strong void *RXTreeNodeGetParent(RXTreeNodeRef self);
 
+__strong void RXTreeNodeSetData(RXTreeNodeRef self, __strong void * data);
 __strong void *RXTreeNodeGetData(RXTreeNodeRef self);
 __strong CFArrayRef RXTreeNodeGetChildren(RXTreeNodeRef self);
 __strong RXTreeNodeRef RXTreeNodeGetChild(RXTreeNodeRef self, RXIndex i);

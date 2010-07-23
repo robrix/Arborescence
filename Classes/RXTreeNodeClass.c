@@ -103,7 +103,8 @@ RXTreeNodeRef RXTreeNodeClassInstantiate(RXTreeNodeClassRef self, void * data, C
 		RXIndex size = RXTreeNodeClassInstanceDataSize(self);
 		if(size > 0) {
 			// assert that data is non-null
-			memcpy(((uint8_t *)node) + RXTreeNodeClassInstanceDataOffset(self), data, size);
+			if(data)
+				memcpy(((uint8_t *)node) + RXTreeNodeClassInstanceDataOffset(self), data, size);
 		}
 	}
 	// assert that children is non-null if the node class is not nullary
