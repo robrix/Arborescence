@@ -22,6 +22,10 @@ bool RXTreeNodeIsEqual(RXTreeNodeRef self, RXTreeNodeRef other) {
 	&&	((self->children == other->children) || CFEqual(self->children, other->children));
 }
 
+__strong CFStringRef RXTreeNodeCopyDescription(RXTreeNodeRef self) {
+	return CFStringCreateWithFormat(NULL, NULL, CFSTR("<RXTreeNode:%@(%u)>"), RXTreeNodeClassGetName(self->nodeClass), CFArrayGetCount(RXTreeNodeGetChildren(self)));
+}
+
 
 void *RXTreeNodeAcceptVisitor(RXTreeNodeRef self, RXTreeVisitorRef visitor) {
 	void *result = NULL;
@@ -87,4 +91,5 @@ struct RXObjectType RXTreeNodeType = {
 	
 	.deallocate = (RXDeallocateMethod)RXTreeNodeDeallocate,
 	.isEqual = (RXIsEqualMethod)RXTreeNodeIsEqual,
+	.copyDescription = (RXCopyDescriptionMethod)RXTreeNodeCopyDescription,
 };
