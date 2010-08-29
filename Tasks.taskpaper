@@ -6,3 +6,5 @@ Nodes:
 	- handle data alignment/padding.
 Visitors:
 	- remove visitor: from the delegate visitor methods.
+	- pass a context pointer around.
+		Isn’t that what the visitor reference is for? Isn’t it our context pointer? If so, it should be easy to extend/subclass the visitors.
