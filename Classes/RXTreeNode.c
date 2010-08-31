@@ -23,7 +23,8 @@ bool RXTreeNodeIsEqual(RXTreeNodeRef self, RXTreeNodeRef other) {
 }
 
 __strong CFStringRef RXTreeNodeCopyDescription(RXTreeNodeRef self) {
-	return CFStringCreateWithFormat(NULL, NULL, CFSTR("<RXTreeNode:%@(%u)>"), RXTreeNodeClassGetName(self->nodeClass), CFArrayGetCount(RXTreeNodeGetChildren(self)));
+	CFArrayRef children = RXTreeNodeGetChildren(self);
+	return CFStringCreateWithFormat(NULL, NULL, CFSTR("<RXTreeNode:%@(%u)>"), RXTreeNodeClassGetName(self->nodeClass), children ? CFArrayGetCount(children) : 0);
 }
 
 
