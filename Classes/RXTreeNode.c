@@ -62,7 +62,9 @@ __strong void *RXTreeNodeGetParent(RXTreeNodeRef self) {
 
 __strong void RXTreeNodeSetData(RXTreeNodeRef self, __strong void * data) {
 	if(RXTreeNodeClassDataIsObject(self->nodeClass)) {
-		self->data = data;
+		__strong RXObjectRef temp = self->data;
+		self->data = RXRetain(data);
+		RXRelease(temp);
 	} else {
 		memcpy(((uint8_t *)self) + RXTreeNodeClassInstanceDataOffset(self->nodeClass), data, RXTreeNodeClassInstanceDataSize(self->nodeClass));
 	}

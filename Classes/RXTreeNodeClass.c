@@ -92,13 +92,13 @@ RXIndex RXTreeNodeClassInstanceChildrenOffset(RXTreeNodeClassRef self) {
 }
 
 
-RXTreeNodeRef RXTreeNodeClassInstantiate(RXTreeNodeClassRef self, void * data, CFArrayRef children) {
+RXTreeNodeRef RXTreeNodeClassInstantiate(RXTreeNodeClassRef self, __strong void * data, CFArrayRef children) {
 	RXTreeNodeRef node = RXCreate(RXTreeNodeClassInstanceSize(self), &RXTreeNodeType);
 	// fixme: assert the existence of self
 	node->nodeClass = RXRetain(self);
 	if(RXTreeNodeClassDataIsObject(self)) {
 		// assert that data is non-null
-		node->data = RXRetain(data);
+		RXTreeNodeSetData(node, data);
 	} else {
 		RXIndex size = RXTreeNodeClassInstanceDataSize(self);
 		if(size > 0) {
@@ -122,7 +122,7 @@ RXTreeNodeRef RXTreeNodeClassInstantiateBranch(RXTreeNodeClassRef self, CFArrayR
 	return RXTreeNodeClassInstantiate(self, NULL, children);
 }
 
-RXTreeNodeRef RXTreeNodeClassInstantiateLeaf(RXTreeNodeClassRef self, void * data) {
+RXTreeNodeRef RXTreeNodeClassInstantiateLeaf(RXTreeNodeClassRef self, __strong void * data) {
 	return RXTreeNodeClassInstantiate(self, data, NULL);
 }
 
